@@ -1,0 +1,1767 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Gasto Calórico Online</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        header {
+            background-color: #00242e;
+            padding: 20px;
+            text-align: left;
+            color: #fff;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            max-width: 150px;
+            height: auto;
+            margin-right: 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #980404;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .nav a:hover {
+            background-color: #07bef1;
+        }
+
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #00242e;
+            margin-bottom: 20px;
+        }
+
+        .IMC {
+            margin: 10px 0;
+            padding: 15px;
+            border: 2px solid rgba(44, 68, 78, 0.5);
+            border-radius: 15px;
+            cursor: pointer;
+            background-color: #fff;
+        }
+
+        .IMC label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .IMC .input-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .IMC input,
+        .IMC select {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #00242e;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #16c5b1;
+        }
+
+        footer {
+            background-color: #00242e;
+            padding: 20px 0;
+            text-align: center;
+            color: #fff;
+        }
+
+        .rodape {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .direitos-autorais {
+            font-size: 14px;
+        }
+
+        .relatorio {
+            margin-top: 20px;
+            padding: 15px;
+            border: 2px solid #00242e;
+            border-radius: 15px;
+        }
+
+        .relatorio button {
+            background-color: #16c5b1;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .relatorio button:hover {
+            background-color: #00242e;
+        }
+
+        .input-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .input-container a {
+            text-decoration: none;
+            background-color: #00242e;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .input-container a:hover {
+            background-color: #16c5b1;
+        }
+
+        #Botao-chat {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #02546b;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            z-index: 9999;
+        }
+
+        #popup-chat {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            z-index: 9999;
+            width: 300px;
+            color: #fff;
+        }
+
+        #popup-chat img {
+            margin-bottom: 10px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="/img/Salusvitalis-removebg-preview.png" alt="Logo da Clínica de Emagrecimento">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">SAIR</a></li>
+
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Calculadora de Gasto Calórico Online</h1>
+        <div class="IMC">
+            <div class="input-container">
+                <label for="peso">Peso (em kg):</label>
+                <input type="number" id="peso" placeholder="Digite seu peso" required>
+            </div>
+
+            <div class="input-container">
+                <label for="altura">Altura (em cm):</label>
+                <input type="number" id="altura" placeholder="Digite sua altura" required>
+            </div>
+
+            <div class="input-container">
+                <label for="idade">Idade:</label>
+                <input type="number" id="idade" placeholder="Digite sua idade" required>
+            </div>
+
+            <div class="input-container">
+                <label for="sexo">Sexo:</label>
+                <select id="sexo">
+                    <option value="feminino">Feminino</option>
+                    <option value="masculino">Masculino</option>
+                </select>
+            </div>
+
+            <div class="input-container">
+                <label for="atividade">Nível de Atividade:</label>
+                <select id="atividade">
+                    <option value="sedentario">Sedentário (pouco ou nenhum exercício)</option>
+                    <option value="leve">Leve (exercício leve ou esporádico)</option>
+                    <option value="moderado">Moderado (exercício moderado, 3-4 vezes por semana)</option>
+                    <option value="ativo">Ativo (exercício ativo, 5-6 vezes por semana)</option>
+                    <option value="muitoativo">Muito Ativo (exercício diário ou treino intenso)</option>
+                </select>
+            </div>
+
+
+
+                   <div style="text-align: center; margin: 20px 0; font-weight: bold; font-size: 18px;">
+                   Quais Alimentos Você Costuma Consumir?
+                   </div>
+
+
+            <div class="input-container">
+                <label for="alimento">Cereais e Derivados</label>
+                <select id="alimento">
+                    <option value="--">NADA</option>
+                    <option value="Arroz_integral_cozido">Arroz Integral Cozido</option>
+                    <option value="Arroz_integral_cru">Arroz Integral Cru</option>
+                    <option value="Arroz_tipo_1_cozido">Arroz Tipo 1 Cozido</option>
+                    <option value="Arroz_tipo_1_cru">Arroz Tipo 1 Cru</option>
+                    <option value="Arroz_tipo_2_cozido">Arroz Tipo 2 Cozido</option>
+                    <option value="Arroz_tipo_2_cru">Arroz Tipo 2 Cru</option>
+                    <option value="Aveia_flocos_crua">Aveia Flocos Crua</option>
+                    <option value="Biscoito_doce_maisena">Biscoito Doce Maisena</option>
+                    <option value="Biscoito_doce_recheado_chocolate">Biscoito Doce Recheado Chocolate</option>
+                    <option value="Biscoito_doce_recheado_morango">Biscoito Doce Recheado Morango</option>
+                    <option value="Biscoito_doce_wafer_recheado_chocolate">Biscoito Doce Wafer Recheado Chocolate</option>
+                    <option value="Biscoito_doce_wafer_recheado_morango">Biscoito Doce Wafer Recheado Morango</option>
+                    <option value="Biscoito_salgado_cream_cracker">Biscoito Salgado Cream Cracker</option>
+                    <option value="Bolo_mistura_para">Bolo Mistura Para</option>
+                    <option value="Bolo_pronto_aipim">Bolo Pronto Aipim</option>
+                    <option value="Bolo_pronto_chocolate">Bolo Pronto Chocolate</option>
+                    <option value="Bolo_pronto_coco">Bolo Pronto Coco</option>
+                    <option value="Bolo_pronto_milho">Bolo Pronto Milho</option>
+                    <option value="Canjica_branca_crua">Canjica Branca Crua</option>
+                    <option value="Canjica_com_leite_integral">Canjica Com Leite Integral</option>
+                    <option value="Cereais_milho_flocos_com_sal">Cereais Milho Flocos Com Sal</option>
+                    <option value="Cereais_milho_flocos_sem_sal">Cereais Milho Flocos Sem Sal</option>
+                    <option value="Cereais_mingau_milho_infantil">Cereais Mingau Milho Infantil</option>
+                    <option value="Cereais_mistura_vitamina_trigo_cevada_aveia">Cereais Mistura Vitamina Trigo Cevada Aveia</option>
+                    <option value="Cereal_matinal_milho">Cereal Matinal Milho</option>
+                    <option value="Cereal_matinal_milho_acucar">Cereal Matinal Milho Açúcar</option>
+                    <option value="Creme_arroz_po">Creme Arroz Pó</option>
+                    <option value="Creme_milho_po">Creme Milho Pó</option>
+                    <option value="Curau_milho_verde">Curau Milho Verde</option>
+                    <option value="Curau_milho_verde_mistura_para">Curau Milho Verde Mistura Para</option>
+                    <option value="Farinha_arroz_enriquecida">Farinha Arroz Enriquecida</option>
+                    <option value="Farinha_centeio_integral">Farinha Centeio Integral</option>
+                    <option value="Farinha_milho_amarela">Farinha Milho Amarela</option>
+                    <option value="Farinha_rosca">Farinha Rosca</option>
+                    <option value="Farinha_trigo">Farinha Trigo</option>
+                    <option value="Farinha_lactea_cereais">Farinha Láctea Cereais</option>
+                    <option value="Lasanha_massa_fresca_cozida">Lasanha Massa Fresca Cozida</option>
+                    <option value="Lasanha_massa_fresca_crua">Lasanha Massa Fresca Crua</option>
+                    <option value="Macarrao_instantaneo">Macarrão Instantâneo</option>
+                    <option value="Macarrao_trigo_cru">Macarrão Trigo Cru</option>
+                    <option value="Macarrao_trigo_cru_com_ovos">Macarrão Trigo Cru Com Ovos</option>
+                    <option value="Milho_amido_cru">Milho Amido Cru</option>
+                    <option value="Milho_fuba_cru">Milho Fubá Cru</option>
+                    <option value="Milho_verde_cru">Milho Verde Cru</option>
+                    <option value="Milho_verde_enlatado_drenado">Milho Verde Enlatado Drenado</option>
+                    <option value="Mingau_tradicional_po">Mingau Tradicional Pó</option>
+                    <option value="Pamonha_barra_cozimento_pre_cozida">Pamonha Barra Cozimento Pré-cozida</option>
+                    <option value="Pao_aveia_forma">Pão Aveia Forma</option>
+                    <option value="Pao_soja">Pão Soja</option>
+                    <option value="Pao_gluten_forma">Pão Glúten Forma</option>
+                    <option value="Pao_milho_forma">Pão Milho Forma</option>
+                    <option value="Pao_trigo_forma_integral">Pão Trigo Forma Integral</option>
+                    <option value="Pao_trigo_frances">Pão Trigo Francês</option>
+                    <option value="Pao_trigo_sovado">Pão Trigo Sovado</option>
+                    <option value="Pastel_carne_cru">Pastel Carne Cru</option>
+                    <option value="Pastel_carne_frito">Pastel Carne Frito</option>
+                    <option value="Pastel_queijo_cru">Pastel Queijo Cru</option>
+                    <option value="Pastel_queijo_frito">Pastel Queijo Frito</option>
+                    <option value="Pastel_massa_crua">Pastel Massa Crua</option>
+                    <option value="Pastel_massa_frita">Pastel Massa Frita</option>
+                    <option value="Pipoca_com_oleo_soja_sem_sal">Pipoca Com Óleo Soja Sem Sal</option>
+                    <option value="Polenta_pre_cozida">Polenta Pré-cozida</option>
+                    <option value="Torrada_pao_frances">Torrada Pão Francês</option>
+                </select>
+            </div>
+            
+            
+
+            <div class="input-container">
+                <label for="alimento2">Verduras Hortaliças Derivado</label>
+                <select id="alimento2">
+                    <option value="--">NADA</option>
+                    <option value="Abobora_cozida">Abóbora, cabotian, cozida</option>
+                    <option value="Abobora_crua">Abóbora, cabotian, crua</option>
+                    <option value="Abobora_menina_crua">Abóbora, menina brasileira, crua</option>
+                    <option value="Abobora_moranga_crua">Abóbora, moranga, crua</option>
+                    <option value="Abobora_moranga_refogada">Abóbora, moranga, refogada</option>
+                    <option value="Abobora_pescoço_crua">Abobora, pescoço, crua</option>
+                    <option value="Abobrinha_italiana_cozida">Abobrinha, italiana, cozida</option>
+                    <option value="Abobrinha_italiana_crua">Abobrinha, italiana, crua</option>
+                    <option value="Abobrinha_italiana_refogada">Abobrinha, italiana, refogada</option>
+                    <option value="Abobrinha_paulista_crua">Abobrinha, paulista, crua</option>
+                    <option value="Acelga_crua">Acelga, crua</option>
+                    <option value="Agriao_cru">Agrião, cru</option>
+                    <option value="Aipo_cru">Aipo, cru</option>
+                    <option value="Alface_americana_crua">Alface americana, crua</option>
+                    <option value="Alface_crespa_crua">Alface crespa, crua</option>
+                    <option value="Alface_lisa_crua">Alface lisa, crua</option>
+                    <option value="Alface_roxa_crua">Alface roxa, crua</option>
+                    <option value="Alfavaca_crua">Alfavaca, crua</option>
+                    <option value="Alho_cru">Alho, cru</option>
+                    <option value="Alho_poro_cru">Alho-poró, cru</option>
+                    <option value="Almeirao_cru">Almeirão, cru</option>
+                    <option value="Almeirao_refogado">Almeirão, refogado</option>
+                    <option value="Batata_baroa_cozida">Batata baroa cozida</option>
+                    <option value="Batata_baroa_crua">Batata baroa crua</option>
+                    <option value="Batata_doce_cozida">Batata doce cozida</option>
+                    <option value="Barra">Batata doce crua</option>
+                    <option value="Batata_frita_industrializada">Batata frita tipo chips industrializada</option>
+                    <option value="Batata_inglesa_cozida">Batata inglesa, cozida</option>
+                    <option value="Batata_inglesa_crua">Batata inglesa, crua</option>
+                    <option value="Batata_inglesa_frita">Batata inglesa, frita</option>
+                    <option value="Batata_inglesa_sauté">Batata inglesa preparada sauté</option>
+                    <option value="Berinjela_cozida">Berinjela cozida</option>
+                    <option value="Berinjela_crua">Berinjela crua</option>
+                    <option value="Beterraba_cozida">Beterraba cozida</option>
+                    <option value="Beterraba_crua">Beterraba crua</option>
+                    <option value="Biscoito_polvilho_doce">Biscoito de polvilho doce</option>
+                    <option value="Brocolis_cozido">Brócolis cozido</option>
+                    <option value="Brocolis_cru">Brócolis cru</option>
+                    <option value="Cara_cozido">Cará cozido</option>
+                    <option value="Cara_cru">Cará cru</option>
+                    <option value="Caruru_cru">Caruru cru</option>
+                    <option value="Catalonha_crua">Catalonha crua</option>
+                    <option value="Catalonha_refogada">Catalonha refogada</option>
+                    <option value="Cebola_crua">Cebola crua</option>
+                    <option value="Cebolinha_crua">Cebolinha crua</option>
+                    <option value="Cenoura_cozida">Cenoura cozida</option>
+                    <option value="Cenoura_crua">Cenoura crua</option>
+                    <option value="Chicoria_crua">Chicória crua</option>
+                    <option value="Chuchu_cozido">Chuchu cozido</option>
+                    <option value="Chuchu_cru">Chuchu cru</option>
+                    <option value="Coentro_folhas_desidratadas">Coentro folhas desidratadas</option>
+                    <option value="Couve_manteiga_crua">Couve manteiga crua</option>
+                    <option value="Couve_manteiga_refogada">Couve manteiga refogada</option>
+                    <option value="Couve-flor_crua">Couve-flor crua</option>
+                    <option value="Couve-flor_cozida">Couve-flor cozida</option>
+                    <option value="Espinafre_nova_zelandia_cru">Espinafre Nova Zelândia cru</option>
+                    <option value="Espinafre_nova_zelandia_refogado">Espinafre Nova Zelândia refogado</option>
+                    <option value="Farinha_mandioca_crua">Farinha de mandioca crua</option>
+                    <option value="Farinha_mandioca_torrada">Farinha de mandioca torrada</option>
+                    <option value="Farinha_puba">Farinha de puba</option>
+                    <option value="Fecula_mandioca">Fécula de mandioca</option>
+                    <option value="Feijao_broto_cru">Feijão broto cru</option>
+                    <option value="Inhame_cru">Inhame cru</option>
+                    <option value="Jilo_cru">Jiló cru</option>
+                    <option value="Jurubeba_crua">Jurubeba crua</option>
+                    <option value="Mandioca_cozida">Mandioca cozida</option>
+                    <option value="Mandioca_crua">Mandioca crua</option>
+                    <option value="Mandioca_farofa_temperada">Mandioca farofa temperada</option>
+                    <option value="Mandioca_frita">Mandioca frita</option>
+                    <option value="Manjericao_cru">Manjericão cru</option>
+                    <option value="Maxixe_cru">Maxixe cru</option>
+                    <option value="Nostarda_folha_crua">Mostarda folha crua</option>
+                    <option value="Nhoque_batata_cozido">Nhoque de batata cozido</option>
+                    <option value="Nabo_cru">Nabo cru</option>
+                    <option value="Palmito_jucara_conserva">Palmito juçara em conserva</option>
+                    <option value="Palmito_pupunha_conserva">Palmito pupunha em conserva</option>
+                    <option value="Pao_queijo_assado">Pão de queijo assado</option>
+                    <option value="Pao_queijo_cru">Pão de queijo cru</option>
+                    <option value="Pepino_cru">Pepino cru</option>
+                    <option value="Pimentao_amarelo_cru">Pimentão amarelo cru</option>
+                    <option value="Pimentao_verde_cru">Pimentão verde cru</option>
+                    <option value="Pimentao_vermelho_cru">Pimentão vermelho cru</option>
+                    <option value="Polvilho_doce">Polvilho doce</option>
+                    <option value="Ruiabo_cru">Quiabo cru</option>
+                    <option value="Rabanete_cru">Rabanete cru</option>
+                    <option value="Repolho_branco_cru">Repolho branco cru</option>
+                    <option value="Repolho_roxo_cru">Repolho roxo cru</option>
+                    <option value="Repolho_roxo_refogado">Repolho roxo refogado</option>
+                    <option value="Rucula_crua">Rúcula crua</option>
+                    <option value="Salsa_crua">Salsa crua</option>
+                    <option value="Seleta_legumes_enlatada">Seleta de legumes enlatada</option>
+                    <option value="Serralha_crua">Serralha crua</option>
+                    <option value="Taioba_crua">Taioba crua</option>
+                    <option value="Tomate_com_semente_cru">Tomate com semente cru</option>
+                    <option value="Tomate_extrato">Tomate extrato</option>
+                    <option value="Tomate_molho_industrializado">Tomate molho industrializado</option>
+                    <option value="Tomate_pure">Tomate purê</option>
+                    <option value="Tomate_salada">Tomate salada</option>
+                    <option value="Vagem_crua">Vagem crua</option>
+                </select>
+            </div>
+            
+
+
+            <div class="input-container">
+                <label for="alimento3">Frutas e Derivados:</label>
+                <select id="alimento3">
+                    <option value="--">NADA</option>
+                    <option value="Abacate_cru">Abacate, cru</option>
+                    <option value="Abacaxi_cru">Abacaxi, cru</option>
+                    <option value="Abacaxi_polpa_congelada">Abacaxi, polpa, congelada</option>
+                    <option value="Abiu_cru">Abiu, cru</option>
+                    <option value="Açaí_polpa_xarope_guaraná_glucose">Açaí, polpa, com xarope de guaraná e glucose</option>
+                    <option value="Açaí_polpa_congelada">Açaí, polpa, congelada</option>
+                    <option value="Acerola_crua">Acerola, crua</option>
+                    <option value="Acerola_polpa_congelada">Acerola, polpa, congelada</option>
+                    <option value="Ameixa_calda_enlatada">Ameixa, calda, enlatada</option>
+                    <option value="Ameixa_crua">Ameixa, crua</option>
+                    <option value="Ameixa_enlatada_drenada">Ameixa, em calda, enlatada, drenada</option>
+                    <option value="Atemoia_crua">Atemóia, crua</option>
+                    <option value="Banana_da_terra_crua">Banana, da terra, crua</option>
+                    <option value="Banana_doce_barra">Banana, doce em barra</option>
+                    <option value="Banana_figo_crua">Banana, figo, crua</option>
+                    <option value="Banana_maca_crua">Banana, maçã, crua</option>
+                    <option value="Banana_nanica_crua">Banana, nanica, crua</option>
+                    <option value="Banana_ouro_crua">Banana, ouro, crua</option>
+                    <option value="Banana_pacova_crua">Banana, pacova, crua</option>
+                    <option value="Banana_prata_crua">Banana, prata, crua</option>
+                    <option value="Cacau_cru">Cacau, cru</option>
+                    <option value="Caja_Manga_cru">Cajá-Manga, cru</option>
+                    <option value="Caja_polpa_congelada">Cajá, polpa, congelada</option>
+                    <option value="Caju_cru">Caju, cru</option>
+                    <option value="Caju_polpa_congelada">Caju, polpa, congelada</option>
+                    <option value="Caju_suco_concentrado_envasado">Caju, suco concentrado, envasado</option>
+                    <option value="Cajá_Manga_cru">Caqui, chocolate, cru</option>
+                    <option value="Carambola_crua">Carambola, crua</option>
+                    <option value="Ciriguela_crua">Ciriguela, crua</option>
+                    <option value="Cupuacu_cru">Cupuaçu, cru</option>
+                    <option value="Cupuacu_polpa_congelada">Cupuaçu, polpa, congelada</option>
+                    <option value="Figo_cru">Figo, cru</option>
+                    <option value="Figo_enlatado_calda">Figo, enlatado, em calda</option>
+                    <option value="Fruta_pao_crua">Fruta-pão, crua</option>
+                    <option value="Goiaba_branca_casca_crua">Goiaba, branca, com casca, crua</option>
+                    <option value="Goiaba_doce_pasta">Goiaba, doce em pasta</option>
+                    <option value="Goiaba_doce_cascao">Goiaba, doce, cascão</option>
+                    <option value="Goiaba_vermelha_casca_crua">Goiaba, vermelha, com casca, crua</option>
+                    <option value="Graviola_crua">Graviola, crua</option>
+                    <option value="Graviola_polpa_congelada">Graviola, polpa, congelada</option>
+                    <option value="Groselha_casca_crua">Groselha, casca, crua</option>
+                    <option value="Groselha_crua">Groselha, crua</option>
+                    <option value="Jabuticaba_crua">Jabuticaba, crua</option>
+                    <option value="Jambo_cru">Jambo, cru</option>
+                    <option value="Jamelao_cru">Jamelão, cru</option>
+                    <option value="Jenipapo_cru">Jenipapo, cru</option>
+                    <option value="Jujuba_crua">Jujuba, crua</option>
+                    <option value="Kiwi_cru">Kiwi, cru</option>
+                    <option value="Laranja_baia_casca_crua">Laranja, baía, com casca, crua</option>
+                    <option value="Laranja_bahia_crua">Laranja, bahia, crua</option>
+                    <option value="Laranja_bahia_suco">Laranja, bahia, suco</option>
+                    <option value="Laranja_baia_suco">Laranja, baía, suco</option>
+                    <option value="Laranja_cara_casca_crua">Laranja, cara, com casca, crua</option>
+                    <option value="Laranja_cara_suco">Laranja, cara, suco</option>
+                    <option value="Laranja_da_terra_casca_crua">Laranja, da terra, com casca, crua</option>
+                    <option value="Laranja_da_terra_suco">Laranja, da terra, suco</option>
+                    <option value="Laranja_doce_casca_crua">Laranja, doce, com casca, crua</option>
+                    <option value="Laranja_doce_suco">Laranja, doce, suco</option>
+                    <option value="Laranja_figo_casca_crua">Laranja, figo, com casca, crua</option>
+                    <option value="Laranja_figo_suco">Laranja, figo, suco</option>
+                    <option value="Laranja_kiwi_casca_crua">Laranja, kiwi, com casca, crua</option>
+                    <option value="Laranja_lima_casca_crua">Laranja, lima, com casca, crua</option>
+                    <option value="Laranja_lima_suco">Laranja, lima, suco</option>
+                    <option value="Laranja_mimo_casca_crua">Laranja, mimo, com casca, crua</option>
+                    <option value="Laranja_mimo_suco">Laranja, mimo, suco</option>
+                    <option value="Laranja_montenegro_casca_crua">Laranja, montenegro, com casca, crua</option>
+                    <option value="Laranja_montenegro_suco">Laranja, montenegro, suco</option>
+                    <option value="Laranja_morumbi_casca_crua">Laranja, morumbi, com casca, crua</option>
+                    <option value="Laranja_morumbi_suco">Laranja, morumbi, suco</option>
+                    <option value="Laranja_pera_casca_crua">Laranja, pêra, com casca, crua</option>
+                    <option value="Laranja_pera_suco">Laranja, pêra, suco</option>
+                    <option value="Laranja_serra_casca_crua">Laranja, serra, com casca, crua</option>
+                    <option value="Laranja_serra_suco">Laranja, serra, suco</option>
+                    <option value="Laranja_umbigo_casca_crua">Laranja, umbigo, com casca, crua</option>
+                    <option value="Laranja_umbigo_suco">Laranja, umbigo, suco</option>
+                    <option value="Laranja_valencia_casca_crua">Laranja, valência, com casca, crua</option>
+                    <option value="Laranja_valencia_suco">Laranja, valência, suco</option>
+                    <option value="Limão_galego_casca_cru">Limão, galego, com casca, cru</option>
+                    <option value="Limão_galego_suco">Limão, galego, suco</option>
+                    <option value="Limão_taiti_casca_cru">Limão, taiti, com casca, cru</option>
+                    <option value="Limão_taiti_suco">Limão, taiti, suco</option>
+                    <option value="Maça_argentina_crua">Maçã, argentina, crua</option>
+                    <option value="Maça_bravo_esmalte">Maçã, Bravo, esmalte</option>
+                    <option value="Maça_casca_crua">Maçã, com casca, crua</option>
+                    <option value="Maça_folha_suco">Maçã, folha, suco</option>
+                    <option value="Maça_gala_crua">Maçã, gala, crua</option>
+                    <option value="Maça_golden_crua">Maçã, golden, crua</option>
+                    <option value="Maça_verde_crua">Maçã, verde, crua</option>
+                    <option value="Macaúba_crua">Macaúba, crua</option>
+                    <option value="Mamao_cru">Mamão, cru</option>
+                    <option value="Mamao_formosa_cru">Mamão, formosa, cru</option>
+                    <option value="Mamao_papaia_cru">Mamão, papaia, cru</option>
+                    <option value="Manga_crua">Manga, crua</option>
+                    <option value="Manga_haden_crua">Manga, haden, crua</option>
+                    <option value="Manga_palmer_crua">Manga, palmer, crua</option>
+                    <option value="Manga_polpa_congelada">Manga, polpa, congelada</option>
+                    <option value="Manga_rosa_crua">Manga, rosa, crua</option>
+                    <option value="Maracuja_suco_concentrado">Maracujá suco concentrado</option>
+                    <option value="Maracuja_suco_concentrado_envasado">Maracujá suco concentrado envasado</option>
+                    <option value="Melancia_crua">Melancia, crua</option>
+                    <option value="Melao_cru">Melão, cru</option>
+                    <option value="Mexerica_Murcote_crua">Mexerica Murcote, crua</option>
+                    <option value="Mexerica_Rio_crua">Mexerica Rio, crua</option>
+                    <option value="Morango_cru">Morango, cru</option>
+                    <option value="Nespera_crua">Nêspera, crua</option>
+                    <option value="Pequi_cru">Pequi, cru</option>
+                    <option value="Pera_Park_crua">Pêra Park, crua</option>
+                    <option value="Pera_Williams_crua">Pêra Williams, crua</option>
+                    <option value="Pesego_Aurora_cru">Pêssego Aurora, cru</option>
+                    <option value="Pesego_enlatado_em_calda">Pêssego enlatado em calda</option>
+                    <option value="Pinha_crua">Pinha, crua</option>
+                    <option value="Pitanga_crua">Pitanga, crua</option>
+                    <option value="Pitanga_polpa_congelada">Pitanga polpa congelada</option>
+                    <option value="Roma_crua">Romã, crua</option>
+                    <option value="Tamarindo_cru">Tamarindo, cru</option>
+                    <option value="Tangerina_Ponca_crua">Tangerina Poncã, crua</option>
+                    <option value="Tangerina_Ponca_suco">Tangerina Poncã, suco</option>
+                    <option value="Tucuma_cru">Tucumã, cru</option>
+                    <option value="Umbu_cru">Umbu, cru</option>
+                    <option value="Umbu_polpa_congelada">Umbu polpa congelada</option>
+                    <option value="Uva_Italia_crua">Uva Itália, crua</option>
+                    <option value="Uva_Rubi_crua">Uva Rubi, crua</option>
+                    <option value="Uva_suco_concentrado_envasado">Uva suco concentrado envasado</option>
+                    </select>
+                    </div>
+            
+
+
+                    <div class="input-container">
+                        <label for="alimento4">Gorduras e Oleos</label>
+                        <select id="alimento4">
+                            <option value="--">NADA</option>
+                            <option value="Azeite_de_dende">Azeite, de dendê</option>
+                            <option value="Azeite_extra_virgem">Azeite, de oliva, extra virgem</option>
+                            <option value="Manteiga_com_sal">Manteiga, com sal</option>
+                            <option value="Manteiga_sem_sal">Manteiga, sem sal</option>
+                            <option value="Margarina_com_oleo_hidrogenado_com_sal">Margarina, com óleo hidrogenado, com sal (65% de lipídeos)</option>
+                            <option value="Margarina_com_oleo_hidrogenado_sem_sal">Margarina, com óleo hidrogenado, sem sal (80% de lipídeos)</option>
+                            <option value="Margarina_com_oleo_interesterificado_com_sal">Margarina, com óleo interesterificado, com sal (65% de lipídeos)</option>
+                            <option value="Margarina_com_oleo_interesterificado_sem_sal">Margarina, com óleo interesterificado, sem sal (65% de lipídeos)</option>
+                            <option value="Oleo_de_babacu">Óleo, de babaçu</option>
+                            <option value="Oleo_de_canola">Óleo, de canola</option>
+                            <option value="Oleo_de_girassol">Óleo, de girassol</option>
+                            <option value="Oleo_de_milho">Óleo, de milho</option>
+                            <option value="Oleo_de_pequi">Óleo, de pequi</option>
+                            <option value="Oleo_de_soja">Óleo, de soja</option>
+                        </select>
+                    </div>
+            
+
+
+                    <div class="input-container">
+                        <label for="alimento5">Pescados e Frutos do Mar</label>
+                        <select id="alimento5">
+                            <option value="--">NADA</option>
+                            <option value="Abadejo_file_congelado_assado">Abadejo, filé, congelado, assado</option>
+                            <option value="Abadejo_file_congelado_cozido">Abadejo, filé, congelado, cozido</option>
+                            <option value="Abadejo_file_congelado_cru">Abadejo, filé, congelado, cru</option>
+                            <option value="Abadejo_file_congelado_grelhado">Abadejo, filé, congelado, grelhado</option>
+                            <option value="Atum_conserva_oleo">Atum, conserva em óleo</option>
+                            <option value="Atum_fresco_cru">Atum, fresco, cru</option>
+                            <option value="Bacalhau_salgado_cru">Bacalhau, salgado, cru</option>
+                            <option value="Bacalhau_salgado_refogado">Bacalhau, salgado, refogado</option>
+                            <option value="Cacao_posta_farinha_trigo_frita">Cação, posta, com farinha de trigo, frita</option>
+                            <option value="Cacao_posta_cozida">Cação, posta, cozida</option>
+                            <option value="Cacao_posta_crua">Cação, posta, crua</option>
+                            <option value="Camarao_Rio_Grande_grande_cozido">Camarão, Rio Grande, grande, cozido</option>
+                            <option value="Camarao_Rio_Grande_grande_cru">Camarão, Rio Grande, grande, cru</option>
+                            <option value="Camarao_Sete_Barbas_sem_cabeca_casca_frito">Camarão, Sete Barbas, sem cabeça, com casca, frito</option>
+                            <option value="Caranguejo_cozido">Caranguejo, cozido</option>
+                            <option value="Corimba_cru">Corimba, cru</option>
+                            <option value="Corimbata_assado">Corimbata, assado</option>
+                            <option value="Corimbata_cozido">Corimbata, cozido</option>
+                            <option value="Corvina_agua_doce_crua">Corvina de água doce, crua</option>
+                            <option value="Corvina_mar_crua">Corvina do mar, crua</option>
+                            <option value="Corvina_grande_assada">Corvina grande, assada</option>
+                            <option value="Corvina_grande_cozida">Corvina grande, cozida</option>
+                            <option value="Dourada_agua_doce_fresca">Dourada de água doce, fresca</option>
+                            <option value="Lambari_congelado_cru">Lambari, congelado, cru</option>
+                            <option value="Lambari_congelado_frito">Lambari, congelado, frito</option>
+                            <option value="Lambari_fresco_cru">Lambari, fresco, cru</option>
+                            <option value="Manjuba_farinha_trigo_frita">Manjuba, com farinha de trigo, frita</option>
+                            <option value="Manjuba_frita">Manjuba, frita</option>
+                            <option value="Merluza_file_assado">Merluza, filé, assado</option>
+                            <option value="Merluza_file_cru">Merluza, filé, cru</option>
+                            <option value="Merluza_file_frito">Merluza, filé, frito</option>
+                            <option value="Pescada_branca_crua">Pescada, branca, crua</option>
+                            <option value="Pescada_branca_frita">Pescada, branca, frita</option>
+                            <option value="Pescada_file_farinha_trigo_frito">Pescada, filé, com farinha de trigo, frito</option>
+                            <option value="Pescada_file_cru">Pescada, filé, cru</option>
+                            <option value="Pescada_file_frito">Pescada, filé, frito</option>
+                            <option value="Pescada_file_molho_escabeche">Pescada, filé, molho escabeche</option>
+                            <option value="Pescadinha_crua">Pescadinha, crua</option>
+                            <option value="Pintado_assado">Pintado, assado</option>
+                            <option value="Pintado_cru">Pintado, cru</option>
+                            <option value="Pintado_grelhado">Pintado, grelhado</option>
+                            <option value="Porquinho_cru">Porquinho, cru</option>
+                            <option value="Salmao_file_pele_fresco_grelhado">Salmão, filé, com pele, fresco, grelhado</option>
+                            <option value="Salmao_sem_pele_fresco_cru">Salmão, sem pele, fresco, cru</option>
+                            <option value="Salmao_sem_pele_fresco_grelhado">Salmão, sem pele, fresco, grelhado</option>
+                            <option value="Sardinha_assada">Sardinha, assada</option>
+                            <option value="Sardinha_conserva_oleo">Sardinha, conserva em óleo</option>
+                            <option value="Sardinha_frita">Sardinha, frita</option>
+                            <option value="Sardinha_inteira_crua">Sardinha, inteira, crua</option>
+                            <option value="Tucunare_file_congelado_cru">Tucunaré, filé, congelado, cru</option>
+                        </select>
+                    </div>
+
+
+
+                    <div class="input-container">
+                    <label for="alimento6">Carnes e Derivados</label>
+                    <select id="alimento6">
+                        <option value="--">NADA</option>
+                        <option value="Apresuntado">Apresuntado</option>
+                        <option value="Caldo_de_carne_tablete">Caldo de carne (tablete)</option>
+                        <option value="Caldo_de_galinha_tablete">Caldo de galinha (tablete)</option>
+                        <option value="Carne_bovina_acém_moído_cozido">Carne bovina acém moído cozido</option>
+                        <option value="Carne_bovina_acém_moído_cru">Carne bovina acém moído cru</option>
+                        <option value="Carne_bovina_acém_sem_gordura_cozido">Carne bovina acém sem gordura cozido</option>
+                        <option value="Carne_bovina_acém_sem_gordura_cru">Carne bovina acém sem gordura cru</option>
+                        <option value="Carne_bovina_almôndegas_cruas">Carne bovina almôndegas cruas</option>
+                        <option value="Carne_bovina_almôndegas_fritas">Carne bovina almôndegas fritas</option>
+                        <option value="Carne_bovina_bucho_cozido">Carne bovina bucho cozido</option>
+                        <option value="Carne_bovina_bucho_cru">Carne bovina bucho cru</option>
+                        <option value="Carne_bovina_capa_de_contrafilé_com_gordura_crua">Carne bovina capa de contrafilé com gordura crua</option>
+                        <option value="Carne_bovina_capa_de_contrafilé_com_gordura_grelhada">Carne bovina capa de contrafilé com gordura grelhada</option>
+                        <option value="Carne_bovina_capa_de_contrafilé_sem_gordura_crua">Carne bovina capa de contrafilé sem gordura crua</option>
+                        <option value="Carne_bovina_capa_de_contrafilé_sem_gordura_grelhada">Carne bovina capa de contrafilé sem gordura grelhada</option>
+                        <option value="Carne_bovina_charque_cozido">Carne bovina charque cozido</option>
+                        <option value="Carne_bovina_charque_cru">Carne bovina charque cru</option>
+                        <option value="Carne_bovina_contrafilé_à_milanesa">Carne bovina contrafilé à milanesa</option>
+                        <option value="Carne_bovina_contrafilé_de_costela_cru">Carne bovina contrafilé de costela cru</option>
+                        <option value="Carne_bovina_contrafilé_de_costela_grelhado">Carne bovina contrafilé de costela grelhado</option>
+                        <option value="Carne_bovina_contrafilé_com_gordura_cru">Carne bovina contrafilé com gordura cru</option>
+                        <option value="Carne_bovina_contrafilé_com_gordura_grelhado">Carne bovina contrafilé com gordura grelhado</option>
+                        <option value="Carne_bovina_contrafilé_sem_gordura_cru">Carne bovina contrafilé sem gordura cru</option>
+                        <option value="Carne_bovina_contrafilé_sem_gordura_grelhado">Carne bovina contrafilé sem gordura grelhado</option>
+                        <option value="Carne_bovina_costela_assada">Carne bovina costela assada</option>
+                        <option value="Carne_bovina_costela_crua">Carne bovina costela crua</option>
+                        <option value="Carne_bovina_coxão_duro_sem_gordura_cozido">Carne bovina coxão duro sem gordura cozido</option>
+                        <option value="Carne_bovina_coxão_duro_sem_gordura_cru">Carne bovina coxão duro sem gordura cru</option>
+                        <option value="Carne_bovina_coxão_mole_sem_gordura_cozido">Carne bovina coxão mole sem gordura cozido</option>
+                        <option value="Carne_bovina_coxão_mole_sem_gordura_cru">Carne bovina coxão mole sem gordura cru</option>
+                        <option value="Carne_bovina_cupim_assado">Carne bovina cupim assado</option>
+                        <option value="Carne_bovina_cupim_cru">Carne bovina cupim cru</option>
+                        <option value="Carne_bovina_fígado_cru">Carne bovina fígado cru</option>
+                        <option value="Carne_bovina_fígado_grelhado">Carne bovina fígado grelhado</option>
+                        <option value="Carne_bovina_filé_mignon_sem_gordura_cru">Carne bovina filé mignon sem gordura cru</option>
+                        <option value="Carne_bovina_miolo_de_alcatra_sem_gordura_cru">Carne bovina miolo de alcatra sem gordura cru</option>
+                        <option value="Carne_bovina_miolo_de_alcatra_sem_gordura_grelhado">Carne bovina miolo de alcatra sem gordura grelhado</option>
+                        <option value="Carne_bovina_músculo_sem_gordura_cozido">Carne bovina músculo sem gordura cozido</option>
+                        <option value="Carne_bovina_músculo_sem_gordura_cru">Carne bovina músculo sem gordura cru</option>
+                        <option value="Carne_bovina_paleta_com_gordura_crua">Carne bovina paleta com gordura crua</option>
+                        <option value="Carne_bovina_paleta_sem_gordura_cozida">Carne bovina paleta sem gordura cozida</option>
+                        <option value="Carne_bovina_paleta_sem_gordura_crua">Carne bovina paleta sem gordura crua</option>
+                        <option value="Carne_bovina_patinho_sem_gordura_cru">Carne bovina patinho sem gordura cru</option>
+                        <option value="Carne_bovina_patinho_sem_gordura_grelhado">Carne bovina patinho sem gordura grelhado</option>
+                        <option value="Carne_bovina_peito_sem_gordura_cozido">Carne bovina peito sem gordura cozido</option>
+                        <option value="Carne_bovina_peito_sem_gordura_cru">Carne bovina peito sem gordura cru</option>
+                        <option value="Carne_bovina_picanha_com_gordura_crua">Carne bovina picanha com gordura crua</option>
+                        <option value="Carne_bovina_picanha_com_gordura_grelhada">Carne bovina picanha com gordura grelhada</option>
+                        <option value="Carne_bovina_picanha_sem_gordura_crua">Carne bovina picanha sem gordura crua</option>
+                        <option value="Carne_bovina_picanha_sem_gordura_grelhada">Carne bovina picanha sem gordura grelhada</option>
+                        <option value="Carne_bovina_seca_cozida">Carne bovina seca cozida</option>
+                        <option value="Carne_bovina_seca_crua">Carne bovina seca crua</option>
+                        <option value="Coxinha_de_frango_frita">Coxinha de frango frita</option>
+                        <option value="Croquete_de_carne_cru">Croquete de carne cru</option>
+                        <option value="Croquete_de_carne_frito">Croquete de carne frito</option>
+                        <option value="Empada_de_frango_pré-cozida_assada">Empada de frango pré-cozida assada</option>
+                        <option value="Empada_de_frango_pré-cozida">Empada de frango pré-cozida</option>
+                        <option value="Frango_asa_com_pele_crua">Frango asa com pele crua</option>
+                        <option value="Frango_caipira_inteiro_com_pele_cozido">Frango caipira inteiro com pele cozido</option>
+                        <option value="Frango_caipira_inteiro_sem_pele_cozido">Frango caipira inteiro sem pele cozido</option>
+                        <option value="Frango_coração_cru">Frango coração cru</option>
+                        <option value="Frango_coração_grelhado">Frango coração grelhado</option>
+                        <option value="Frango_coxa_com_pele_assada">Frango coxa com pele assada</option>
+                        <option value="Frango_coxa_com_pele_crua">Frango coxa com pele crua</option>
+                        <option value="Frango_coxa_sem_pele_cozida">Frango coxa sem pele cozida</option>
+                        <option value="Frango_coxa_sem_pele_crua">Frango coxa sem pele crua</option>
+                        <option value="Frango_fígado_cru">Frango fígado cru</option>
+                        <option value="Frango_filé_à_milanesa">Frango filé à milanesa</option>
+                        <option value="Frango_inteiro_com_pele_cru">Frango inteiro com pele cru</option>
+                        <option value="Frango_inteiro_sem_pele_assado">Frango inteiro sem pele assado</option>
+                        <option value="Frango_inteiro_sem_pele_cozido">Frango inteiro sem pele cozido</option>
+                        <option value="Frango_inteiro_sem_pele_cru">Frango inteiro sem pele cru</option>
+                        <option value="Frango_peito_com_pele_assado">Frango peito com pele assado</option>
+                        <option value="Frango_peito_com_pele_cru">Frango peito com pele cru</option>
+                        <option value="Frango_peito_sem_pele_cozido">Frango peito sem pele cozido</option>
+                        <option value="Frango_peito_sem_pele_cru">Frango peito sem pele cru</option>
+                        <option value="Frango_peito_sem_pele_grelhado">Frango peito sem pele grelhado</option>
+                        <option value="Frango_sobrecoxa_com_pele_assada">Frango sobrecoxa com pele assada</option>
+                        <option value="Frango_sobrecoxa_com_pele_crua">Frango sobrecoxa com pele crua</option>
+                        <option value="Frango_sobrecoxa_sem_pele_assada">Frango sobrecoxa sem pele assada</option>
+                        <option value="Frango_sobrecoxa_sem_pele_crua">Frango sobrecoxa sem pele crua</option>
+                        <option value="Hambúrguer_bovino_cru">Hambúrguer bovino cru</option>
+                        <option value="Hambúrguer_bovino_frito">Hambúrguer bovino frito</option>
+                        <option value="Hambúrguer_bovino_grelhado">Hambúrguer bovino grelhado</option>
+                        <option value="Linguiça_frango_crua">Linguiça frango crua</option>
+                        <option value="Linguiça_frango_frita">Linguiça frango frita</option>
+                        <option value="Linguiça_frango_grelhada">Linguiça frango grelhada</option>
+                        <option value="Linguiça_porco_crua">Linguiça porco crua</option>
+                        <option value="Linguiça_porco_frita">Linguiça porco frita</option>
+                        <option value="Linguiça_porco_grelhada">Linguiça porco grelhada</option>
+                        <option value="Mortadela">Mortadela</option>
+                        <option value="Peru_congelado_assado">Peru congelado assado</option>
+                        <option value="Peru_congelado_cru">Peru congelado cru</option>
+                        <option value="Peru_congelado_frito">Peru congelado frito</option>
+                        <option value="Peru_congelado_grelhado">Peru congelado grelhado</option>
+                        <option value="Peru_congelado_sem_pele_assado">Peru congelado sem pele assado</option>
+                        <option value="Peru_congelado_sem_pele_cru">Peru congelado sem pele cru</option>
+                        <option value="Peru_congelado_sem_pele_frito">Peru congelado sem pele frito</option>
+                        <option value="Peru_congelado_sem_pele_grelhado">Peru congelado sem pele grelhado</option>
+                        <option value="Porco_costela_assada">Porco costela assada</option>
+                        <option value="Porco_costela_crua">Porco costela crua</option>
+                        <option value="Porco_lombo_assado">Porco lombo assado</option>
+                        <option value="Porco_lombo_cru">Porco lombo cru</option>
+                        <option value="Porco_orelha_salgada_cozida">Porco orelha salgada cozida</option>
+                        <option value="Porco_orelha_salgada_crua">Porco orelha salgada crua</option>
+                        <option value="Porco_pernil_assado">Porco pernil assado</option>
+                        <option value="Porco_pernil_cru">Porco pernil cru</option>
+                        <option value="Porco_rabo_salgado_cru">Porco rabo salgado cru</option>
+                        <option value="Presunto_com_capa_de_gordura">Presunto com capa de gordura</option>
+                        <option value="Presunto_sem_capa_de_gordura">Presunto sem capa de gordura</option>
+                        <option value="Quibe_assado">Quibe assado</option>
+                        <option value="Quibe_cru">Quibe cru</option>
+                        <option value="Quibe_frito">Quibe frito</option>
+                        <option value="Salame">Salame</option>
+                        <option value="Toucinho_cru">Toucinho cru</option>
+                    </select>
+                </div>
+                
+
+
+
+                <div class="input-container">
+                    <label for="alimento7">Leite e Derivados</label>
+                    <select id="alimento7">
+                        <option value="--">NADA</option>
+                        <option value="Bebida_lactea_pessego">Bebida láctea, pêssego</option>
+                        <option value="Creme_de_leite">Creme de Leite</option>
+                        <option value="Iogurte_natural">Iogurte, natural</option>
+                        <option value="Iogurte_natural_desnatado">Iogurte, natural, desnatado</option>
+                        <option value="Iogurte_sabor_abacaxi">Iogurte, sabor abacaxi</option>
+                        <option value="Iogurte_sabor_morango">Iogurte, sabor morango</option>
+                        <option value="Iogurte_sabor_pessego">Iogurte, sabor pêssego</option>
+                        <option value="Leite_condensado">Leite, condensado</option>
+                        <option value="Leite_de_cabra">Leite, de cabra</option>
+                        <option value="Leite_de_vaca_achocolatado">Leite, de vaca, achocolatado</option>
+                        <option value="Leite_de_vaca_desnatado_po">Leite, de vaca, desnatado, pó</option>
+                        <option value="Leite_de_vaca_desnatado_UHT">Leite, de vaca, desnatado, UHT</option>
+                        <option value="Leite_de_vaca_integral">Leite, de vaca, integral</option>
+                        <option value="Leite_de_vaca_integral_po">Leite, de vaca, integral, pó</option>
+                        <option value="Leite_fermentado">Leite, fermentado</option>
+                        <option value="Queijo_minas_frescal">Queijo, minas, frescal</option>
+                        <option value="Queijo_minas_meia_cura">Queijo, minas, meia cura</option>
+                        <option value="Queijo_mozarela">Queijo, mozarela</option>
+                        <option value="Queijo_parmesao">Queijo, parmesão</option>
+                        <option value="Queijo_pasteurizado">Queijo, pasteurizado</option>
+                        <option value="Queijo_petit_suisse_morango">Queijo, petit suisse, morango</option>
+                        <option value="Queijo_prato">Queijo, prato</option>
+                        <option value="Queijo_requeijao_cremoso">Queijo, requeijão, cremoso</option>
+                        <option value="Queijo_ricota">Queijo, ricota</option>
+                    </select>
+                </div>
+                
+
+
+
+                <div class="input-container">
+                    <label for="alimento8">Bebidas Alcoólicas e Não Alcoólicas</label>
+                    <select id="alimento8">
+                        <option value="--">NADA</option>
+                        <option value="Bebida_isotonica_sabores_variados">Bebida isotônica, sabores variados</option>
+                        <option value="Cafe_infusao_10%">Café, infusão 10%</option>
+                        <option value="Cana_aguardente">Cana, aguardente</option>
+                        <option value="Cana_caldo_de">Cana, caldo de</option>
+                        <option value="Cerveja_pilsen">Cerveja, pilsen</option>
+                        <option value="Cha_erva-doce_infusao_5%">Chá, erva-doce, infusão 5%</option>
+                        <option value="Cha_mate_infusao_5%">Chá, mate, infusão 5%</option>
+                        <option value="Cha_preto_infusao_5%">Chá, preto, infusão 5%</option>
+                        <option value="Coco_agua_de">Coco, água de</option>
+                        <option value="Refrigerante_tipo_agua_tonica">Refrigerante, tipo água tônica</option>
+                        <option value="Refrigerante_tipo_cola">Refrigerante, tipo cola</option>
+                        <option value="Refrigerante_tipo_guarana">Refrigerante, tipo guaraná</option>
+                        <option value="Refrigerante_tipo_laranja">Refrigerante, tipo laranja</option>
+                        <option value="Refrigerante_tipo_limao">Refrigerante, tipo limão</option>
+                        <option value="Suco_abacaxi_natural">Suco, abacaxi, natural</option>
+                        <option value="Suco_laranja_natural">Suco, laranja, natural</option>
+                        <option value="Suco_maca_natural">Suco, maçã, natural</option>
+                        <option value="Suco_uva_natural">Suco, uva, natural</option>
+                        <option value="Vinho_branco">Vinho branco</option>
+                        <option value="Vinho_rosa">Vinho rosé</option>
+                        <option value="Vinho_tinto">Vinho tinto</option>
+                        <option value="Cerveja_sem_alcool">Cerveja sem álcool</option>
+                        <option value="Coquetel_frutas_sem_alcool">Coquetel de frutas sem álcool</option>
+                        <option value="Hidromel">Hidromel</option>
+                        <option value="Licor_amendoa">Licor de amêndoa</option>
+                        <option value="Licor_cacau">Licor de cacau</option>
+                        <option value="Licor_cafe">Licor de café</option>
+                        <option value="Licor_laranja">Licor de laranja</option>
+                        <option value="Licor_limao">Licor de limão</option>
+                        <option value="Licor_mel">Licor de mel</option>
+                        <option value="Licor_menta">Licor de menta</option>
+                        <option value="Licor_morango">Licor de morango</option>
+                        <option value="Licor_pessego">Licor de pêssego</option>
+                        <option value="Licor_umbu">Licor de umbu</option>
+                        <option value="Martini">Martini</option>
+                        <option value="Pina_colada">Pina colada</option>
+                        <option value="Ponche_frutas_sem_alcool">Ponche de frutas sem álcool</option>
+                        <option value="Ponche_frutas_com_alcool">Ponche de frutas com álcool</option>
+                        <option value="Quentao">Quentão</option>
+                        <option value="Sidra">Sidra</option>
+                        <option value="Tequila">Tequila</option>
+                        <option value="Vodka">Vodka</option>
+                        <option value="Whisky">Whisky</option>
+                    </select>
+                </div>
+                
+                
+
+
+           
+                
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <button id="calcularButton">Calcular</button>
+
+
+
+                
+            </div>
+        </div>
+
+        <div class="relatorio" id="relatorio" style="display: none;">
+            <h2>Relatório do Gasto Calórico</h2>
+            <p>Seu gasto calórico diário estimado é de aproximadamente <span id="resultado"></span> calorias.</p>
+            <p>Aqui está uma dica: <span id="dica"></span></p>
+            
+        </div>
+    </div>
+    <footer>
+        <div class="rodape">
+            <div class="logo">
+                <img src="/img/Salusvitalis-removebg-preview.png" alt="Logo da Clínica de Emagrecimento">
+            </div>
+            <div class="informacoes-contato">
+
+            </div>
+        </div>
+        <p class="direitos-autorais">&copy; 2023 SalusVitalis. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const CcaloriasPorPorcao = {
+        'Arroz_integral_cozido': 124,
+        'Arroz_integral_cru': 360,
+        'Arroz_tipo_1_cozido': 128,
+        'Arroz_tipo_1_cru': 358,
+        'Arroz_tipo_2_cozido': 130,
+        'Arroz_tipo_2_cru': 358,
+        'Aveia_flocos_crua': 394,
+        'Biscoito_doce_maisena': 443,
+        'Biscoito_doce_recheado_chocolate': 472,
+        'Biscoito_doce_recheado_morango': 471,
+        'Biscoito_doce_wafer_recheado_chocolate': 502,
+        'Biscoito_doce_wafer_recheado_morango': 513,
+        'Biscoito_salgado_cream_cracker': 432,
+        'Bolo_mistura_para': 419,
+        'Bolo_pronto_aipim': 324,
+        'Bolo_pronto_chocolate': 410,
+        'Bolo_pronto_coco': 333,
+        'Bolo_pronto_milho': 311,
+        'Canjica_branca_crua': 358,
+        'Canjica_com_leite_integral': 112,
+        'Cereais_milho_flocos_com_sal': 370,
+        'Cereais_milho_flocos_sem_sal': 363,
+        'Cereais_mingau_milho_infantil': 394,
+        'Cereais_mistura_vitamina_trigo_cevada_aveia': 381,
+        'Cereal_matinal_milho': 365,
+        'Cereal_matinal_milho_acucar': 377,
+        'Creme_arroz_po': 386,
+        'Creme_milho_po': 333,
+        'Curau_milho_verde': 78,
+        'Curau_milho_verde_mistura_para': 402,
+        'Farinha_arroz_enriquecida': 363,
+        'Farinha_centeio_integral': 336,
+        'Farinha_milho_amarela': 351,
+        'Farinha_rosca': 371,
+        'Farinha_trigo': 360,
+        'Farinha_lactea_cereais': 415,
+        'Lasanha_massa_fresca_cozida': 164,
+        'Lasanha_massa_fresca_crua': 220,
+        'Macarrao_instantaneo': 436,
+        'Macarrao_trigo_cru': 371,
+        'Macarrao_trigo_cru_com_ovos': 371,
+        'Milho_amido_cru': 361,
+        'Milho_fuba_cru': 353,
+        'Milho_verde_cru': 138,
+        'Milho_verde_enlatado_drenado': 98,
+        'Mingau_tradicional_po': 373,
+        'Pamonha_barra_cozimento_pre_cozida': 171,
+        'Pao_aveia_forma': 343,
+        'Pao_soja': 309,
+        'Pao_gluten_forma': 253,
+        'Pao_milho_forma': 292,
+        'Pao_trigo_forma_integral': 253,
+        'Pao_trigo_frances': 300,
+        'Pao_trigo_sovado': 311,
+        'Pastel_carne_cru': 289,
+        'Pastel_carne_frito': 388,
+        'Pastel_queijo_cru': 308,
+        'Pastel_queijo_frito': 422,
+        'Pastel_massa_crua': 310,
+        'Pastel_massa_frita': 570,
+        'Pipoca_com_oleo_soja_sem_sal': 448,
+        'Polenta_pre_cozida': 103,
+        'Torrada_pao_frances': 377
+    };
+
+
+    const CcaloriasPorPorcao2 = {
+    'Abóbora_cabotian_cozida': 48,
+    'Abóbora_cabotian_crua': 39,
+    'Abóbora_menina_brasileira_crua': 14,
+    'Abóbora_moranga_crua': 12,
+    'Abóbora_moranga_refogada': 29,
+    'Abobora_pescoço_crua': 24,
+    'Abobrinha_italiana_cozida': 15,
+    'Abobrinha_italiana_crua': 19,
+    'Abobrinha_italiana_refogada': 24,
+    'Abobrinha_paulista_crua': 31,
+    'Acelga_crua': 21,
+    'Agrião_cru': 17,
+    'Aipo_cru': 19,
+    'Alface_americana_crua': 9,
+    'Alface_crespa_crua': 11,
+    'Alface_lisa_crua': 14,
+    'Alface_roxa_crua': 13,
+    'Alfavaca_crua': 29,
+    'Alho_cru': 113,
+    'Alho_poró_cru': 32,
+    'Almeirão_cru': 18,
+    'Almeirão_refogado': 65,
+    'Batata_baroa_cozida': 80,
+    'Batata_baroa_crua': 101,
+    'Batata_doce_cozida': 77,
+    'Batata_doce_crua': 118,
+    'Batata_frita_tipo_chips_industrializada': 543,
+    'Batata_inglesa_cozida': 52,
+    'Batata_inglesa_crua': 64,
+    'Batata_inglesa_frita': 267,
+    'Batata_inglesa_sauté': 68,
+    'Berinjela_cozida': 19,
+    'Berinjela_crua': 20,
+    'Beterraba_cozida': 32,
+    'Beterraba_crua': 49,
+    'Biscoito_polvilho_doce': 438,
+    'Brócolis_cozido': 25,
+    'Brócolis_cru': 25,
+    'Cará_cozido': 78,
+    'Cará_cru': 96,
+    'Caruru_cru': 34,
+    'Catalonha_crua': 24,
+    'Catalonha_refogada': 63,
+    'Cebola_crua': 39,
+    'Cebolinha_crua': 20,
+    'Cenoura_cozida': 30,
+    'Cenoura_crua': 34,
+    'Chicória_crua': 14,
+    'Chuchu_cozido': 19,
+    'Chuchu_cru': 17,
+    'Coentro_folhas_desidratadas': 309,
+    'Couve_manteiga_crua': 27,
+    'Couve_manteiga_refogada': 90,
+    'Couve-flor_crua': 23,
+    'Couve-flor_cozida': 19,
+    'Espinafre_Nova_Zelândia_cru': 16,
+    'Espinafre_Nova_Zelândia_refogado': 67,
+    'Farinha_de_mandioca_crua': 361,
+    'Farinha_de_mandioca_torrada': 365,
+    'Farinha_de_puba': 360,
+    'Fécula_de_mandioca': 331,
+    'Feijão_broto_cru': 39,
+    'Inhame_cru': 97,
+    'Jiló_cru': 27,
+    'Jurubeba_crua': 126,
+    'Mandioca_cozida': 125,
+    'Mandioca_crua': 151,
+    'Mandioca_farofa_temperada': 406,
+    'Mandioca_frita': 300,
+    'Manjericão_cru': 21,
+    'Maxixe_cru': 14,
+    'Mostarda_folha_crua': 18,
+    'Nhoque_batata_cozido': 181,
+    'Nabo_cru': 18,
+    'Palmito_juçara_em_conserva': 23,
+    'Palmito_pupunha_em_conserva': 29,
+    'Pão_de_queijo_assado': 363,
+    'Pão_de_queijo_cru': 295,
+    'Pepino_cru': 10,
+    'Pimentão_amarelo_cru': 28,
+    'Pimentão_verde_cru': 21,
+    'Pimentão_vermelho_cru': 23,
+    'Polvilho_doce': 351,
+    'Quiabo_cru': 30,
+    'Rabanete_cru': 14,
+    'Repolho_branco_cru': 17,
+    'Repolho_roxo_cru': 31,
+    'Repolho_roxo_refogado': 42,
+    'Rúcula_crua': 13,
+    'Salsa_crua': 33,
+    'Seleta_de_legumes_enlatada': 57,
+    'Serralha_crua': 30,
+    'Taioba_crua': 34,
+    'Tomate_com_semente_cru': 15,
+    'Tomate_extrato': 61,
+    'Tomate_molho_industrializado': 38,
+    'Tomate_purê': 28,
+    'Tomate_salada': 21,
+    'Vagem_crua': 25,
+};
+
+
+    const CcaloriasPorPorcao3 = {
+    'Abacate_cru': 96,
+    'Abacaxi_cru': 48,
+    'Abacaxi_polpa_congelada': 31,
+    'Abiu_cru': 62,
+    'Açaí_polpa_xarope_guaraná_glucose': 110,
+    'Açaí_polpa_congelada': 58,
+    'Acerola_crua': 33,
+    'Acerola_polpa_congelada': 22,
+    'Ameixa_calda_enlatada': 183,
+    'Ameixa_crua': 53,
+    'Ameixa_enlatada_drenada': 177,
+    'Atemoia_crua': 97,
+    'Banana_da_terra_crua': 128,
+    'Banana_doce_barra': 280,
+    'Banana_figo_crua': 105,
+    'Banana_maca_crua': 87,
+    'Banana_nanica_crua': 92,
+    'Banana_ouro_crua': 112,
+    'Banana_pacova_crua': 78,
+    'Banana_prata_crua': 98,
+    'Cacau_cru': 74,
+    'Caja_Manga_cru': 46,
+    'Caja_polpa_congelada': 26,
+    'Caju_cru': 43,
+    'Caju_polpa_congelada': 37,
+    'Caju_suco_concentrado_envasado': 45,
+    'Cajá_Manga_cru': 46,
+    'Carambola_crua': 46,
+    'Ciriguela_crua': 76,
+    'Cupuacu_cru': 49,
+    'Cupuacu_polpa_congelada': 49,
+    'Figo_cru': 41,
+    'Figo_enlatado_calda': 184,
+    'Fruta_pao_crua': 67,
+    'Goiaba_branca_casca_crua': 52,
+    'Goiaba_doce_pasta': 269,
+    'Goiaba_doce_cascao': 286,
+    'Goiaba_vermelha_casca_crua': 54,
+    'Graviola_crua': 62,
+    'Graviola_polpa_congelada': 38,
+    'Groselha_casca_crua': 38,
+    'Groselha_crua': 56,
+    'Jabuticaba_crua': 58,
+    'Jambo_cru': 27,
+    'Jamelao_cru': 41,
+    'Jenipapo_cru': 53,
+    'Jujuba_crua': 325,
+    'Kiwi_cru': 51,
+    'Laranja_baia_casca_crua': 45,
+    'Laranja_bahia_crua': 40,
+    'Laranja_bahia_suco': 44,
+    'Laranja_baia_suco': 44,
+    'Laranja_cara_casca_crua': 44,
+    'Laranja_cara_suco': 43,
+    'Laranja_da_terra_casca_crua': 45,
+    'Laranja_da_terra_suco': 41,
+    'Laranja_doce_casca_crua': 42,
+    'Laranja_doce_suco': 40,
+    'Laranja_figo_casca_crua': 43,
+    'Laranja_figo_suco': 40,
+    'Laranja_kiwi_casca_crua': 46,
+    'Laranja_lima_casca_crua': 44,
+    'Laranja_lima_suco': 44,
+    'Laranja_mimo_casca_crua': 44,
+    'Laranja_mimo_suco': 44,
+    'Laranja_montenegro_casca_crua': 44,
+    'Laranja_montenegro_suco': 44,
+    'Laranja_morumbi_casca_crua': 44,
+    'Laranja_morumbi_suco': 44,
+    'Laranja_pera_casca_crua': 44,
+    'Laranja_pera_suco': 44,
+    'Laranja_terra_casca_crua': 44,
+    'Laranja_terra_suco': 44,
+    'Limao_galego_casca_crua': 22,
+    'Limao_galego_suco': 22,
+    'Limao_tahiti_casca_crua': 22,
+    'Limao_tahiti_suco': 22,
+    'Macã_verde_crua': 58,
+    'Macã_vermelha_crua': 58,
+    'Macã_vermelha_suco': 44,
+    'Mamao_formosa_casca_crua': 41,
+    'Mamao_formosa_suco': 38,
+    'Mamao_papaya_cru': 36,
+    'Mamao_papaya_suco': 34,
+    'Manga_crua': 60,
+    'Manga_haden_crua': 60,
+    'Manga_inglesa_crua': 60,
+    'Manga_italiana_crua': 60,
+    'Manga_rose_crua': 60,
+    'Manga_tommy_crua': 60,
+    'Maracuja_cru': 68,
+    'Maracuja_suco_concentrado_enlatado': 73,
+    'Maracuja_suco_natural': 36,
+    'Maranja_crua': 45,
+    'Marmelo_cru': 57,
+    'Marmelo_geleia': 252,
+    'Melancia_crua': 24,
+    'Melao_cru': 32,
+    'Melao_de_Sao_Caetano_cru': 22,
+    'Mexerica_crua': 53,
+    'Mexerica_rio_casca_crua': 48,
+    'Mirtilo_cru': 33,
+    'Morango_cru': 32,
+    'Nectarina_crua': 44,
+    'Nespera_crua': 38,
+    'Nêspera_casca_crua': 44,
+    'Pequi_cru': 212,
+    'Pequi_polpa_congelada': 125,
+    'Pera_cascara_crua': 42,
+    'Pera_suco': 42,
+    'Pessego_cru': 39,
+    'Pessego_enlatado_calda': 188,
+    'Pessego_geleia': 256,
+    'Pessego_polpa_congelada': 25,
+    'Pinha_crua': 53,
+    'Pitanga_crua': 32,
+    'Pitanga_pilada': 48,
+    'Pitanga_polpa_congelada': 31,
+    'Pitanga_suco_natural': 31,
+    'Romã_crua': 56,
+    'Romã_suco_concentrado_enlatado': 66,
+    'Seriguela_crua': 83,
+    'Siriguela_polpa_congelada': 62,
+    'Tamarindo_cru': 280,
+    'Tangerina_crua': 36,
+    'Tangerina_pilada': 46,
+    'Tangerina_suco': 33,
+    'Tucuma_cru': 222,
+    'Tucuma_polpa_congelada': 118,
+    'Umbu_cru': 38,
+    'Umbu_suco_natural': 34,
+    'Uva_italia_crua': 57,
+    'Uva_rubra_crua': 68,
+    'Uva_sapucaia_crua': 61,
+    'Uva_suco_integral_envasado': 56,
+    'Uva_suco_integral_pasteurizado': 56,
+    'Uva_thompson_crua': 71,
+    'Visgueiro_cru': 53,
+    'Visgueiro_polpa_congelada': 37,
+};
+
+
+    const CcaloriasPorPorcao4 = {
+    'Azeite_de_dende': 884,
+    'Azeite_extra_virgem': 884,
+    'Manteiga_com_sal': 726,
+    'Manteiga_sem_sal': 758,
+    'Margarina_com_oleo_hidrogenado_com_sal': 596,
+    'Margarina_com_oleo_hidrogenado_sem_sal': 723,
+    'Margarina_com_oleo_interesterificado_com_sal': 594,
+    'Margarina_com_oleo_interesterificado_sem_sal': 593,
+    'Oleo_de_babacu': 884,
+    'Oleo_de_canola': 884,
+    'Oleo_de_girassol': 884,
+    'Oleo_de_milho': 884,
+    'Oleo_de_pequi': 884,
+    'Oleo_de_soja': 884,
+};
+
+
+    const CcaloriasPorPorcao5 = {
+    'Abadejo_file_congelado_assado': 112,
+    'Abadejo_file_congelado_cozido': 91,
+    'Abadejo_file_congelado_cru': 59,
+    'Abadejo_file_congelado_grelhado': 130,
+    'Atum_conserva_oleo': 166,
+    'Atum_fresco_cru': 118,
+    'Bacalhau_salgado_cru': 136,
+    'Bacalhau_salgado_refogado': 140,
+    'Cacao_posta_farinha_trigo_frita': 208,
+    'Cacao_posta_cozida': 116,
+    'Cacao_posta_crua': 83,
+    'Camarao_Rio_Grande_grande_cozido': 90,
+    'Camarao_Rio_Grande_grande_cru': 47,
+    'Camarao_Sete_Barbas_sem_cabeca_casca_frito': 231,
+    'Caranguejo_cozido': 83,
+    'Corimba_cru': 128,
+    'Corimbata_assado': 261,
+    'Corimbata_cozido': 239,
+    'Corvina_agua_doce_crua': 101,
+    'Corvina_mar_crua': 94,
+    'Corvina_grande_assada': 147,
+    'Corvina_grande_cozida': 100,
+    'Dourada_agua_doce_fresca': 131,
+    'Lambari_congelado_cru': 131,
+    'Lambari_congelado_frito': 327,
+    'Lambari_fresco_cru': 152,
+    'Manjuba_farinha_trigo_frita': 344,
+    'Manjuba_frita': 349,
+    'Merluza_file_assado': 122,
+    'Merluza_file_cru': 89,
+    'Merluza_file_frito': 192,
+    'Pescada_branca_crua': 111,
+    'Pescada_branca_frita': 223,
+    'Pescada_file_farinha_trigo_frito': 283,
+    'Pescada_file_cru': 107,
+    'Pescada_file_frito': 154,
+    'Pescada_file_molho_escabeche': 142,
+    'Pescadinha_crua': 76,
+    'Pintado_assado': 192,
+    'Pintado_cru': 91,
+    'Pintado_grelhado': 152,
+    'Porquinho_cru': 93,
+    'Salmao_file_pele_fresco_grelhado': 229,
+    'Salmao_sem_pele_fresco_cru': 170,
+    'Salmao_sem_pele_fresco_grelhado': 243,
+    'Sardinha_assada': 164,
+    'Sardinha_conserva_oleo': 285,
+    'Sardinha_frita': 257,
+    'Sardinha_inteira_crua': 114,
+    'Tucunare_file_congelado_cru': 88,
+};
+
+
+    const CcaloriasPorPorcao6 ={
+  'Apresuntado': 90,
+  'Caldo_de_carne_tablete': 15,
+  'Caldo_de_galinha_tablete': 15,
+  'Carne_bovina_acém_moído_cozido': 250,
+  'Carne_bovina_acém_moído_cru': 220,
+  'Carne_bovina_acém_sem_gordura_cozido': 150,
+  'Carne_bovina_acém_sem_gordura_cru': 130,
+  'Carne_bovina_almôndegas_cruas': 280,
+  'Carne_bovina_almôndegas_fritas': 350,
+  'Carne_bovina_bucho_cozido': 200,
+  'Carne_bovina_bucho_cru': 180,
+  'Carne_bovina_capa_de_contrafilé_com_gordura_crua': 360,
+  'Carne_bovina_capa_de_contrafilé_com_gordura_grelhada': 300,
+  'Carne_bovina_capa_de_contrafilé_sem_gordura_crua': 300,
+  'Carne_bovina_capa_de_contrafilé_sem_gordura_grelhada': 250,
+  'Carne_bovina_charque_cozido': 300,
+  'Carne_bovina_charque_cru': 250,
+  'Carne_bovina_contrafilé_à_milanesa': 350,
+  'Carne_bovina_contrafilé_de_costela_cru': 280,
+  'Carne_bovina_contrafilé_de_costela_grelhado': 320,
+  'Carne_bovina_contrafilé_com_gordura_cru': 400,
+  'Carne_bovina_contrafilé_com_gordura_grelhado': 350,
+  'Carne_bovina_contrafilé_sem_gordura_cru': 300,
+  'Carne_bovina_contrafilé_sem_gordura_grelhado': 280,
+  'Carne_bovina_costela_assada': 350,
+  'Carne_bovina_costela_crua': 280,
+  'Carne_bovina_coxão_duro_sem_gordura_cozido': 200,
+  'Carne_bovina_coxão_duro_sem_gordura_cru': 180,
+  'Carne_bovina_coxão_mole_sem_gordura_cozido': 240,
+  'Carne_bovina_coxão_mole_sem_gordura_cru': 200,
+  'Carne_bovina_cupim_assado': 300,
+  'Carne_bovina_cupim_cru': 250,
+  'Carne_bovina_fígado_cru': 135,
+  'Carne_bovina_fígado_grelhado': 180,
+  'Carne_bovina_filé_mignon_sem_gordura_cru': 120,
+  'Carne_bovina_miolo_de_alcatra_sem_gordura_cru': 150,
+  'Carne_bovina_miolo_de_alcatra_sem_gordura_grelhado': 180,
+  'Carne_bovina_músculo_sem_gordura_cozido': 200,
+  'Carne_bovina_músculo_sem_gordura_cru': 180,
+  'Carne_bovina_paleta_com_gordura_crua': 350,
+  'Carne_bovina_paleta_sem_gordura_cozida': 250,
+  'Carne_bovina_paleta_sem_gordura_crua': 280,
+  'Carne_bovina_patinho_sem_gordura_cru': 150,
+  'Carne_bovina_patinho_sem_gordura_grelhado': 180,
+  'Carne_bovina_peito_sem_gordura_cozido': 240,
+  'Carne_bovina_peito_sem_gordura_cru': 200,
+  'Carne_bovina_picanha_com_gordura_crua': 450,
+  'Carne_bovina_picanha_com_gordura_grelhada': 400,
+  'Carne_bovina_picanha_sem_gordura_crua': 400,
+  'Carne_bovina_picanha_sem_gordura_grelhada': 350,
+  'Carne_bovina_seca_cozida': 300,
+  'Carne_bovina_seca_crua': 250,
+  'Coxinha_de_frango_frita': 320,
+  'Croquete_de_carne_cru': 300,
+  'Croquete_de_carne_frito': 350,
+  'Empada_de_frango_pré-cozida_assada': 280,
+  'Empada_de_frango_pré-cozida': 250,
+  'Frango_asa_com_pele_crua': 180,
+  'Frango_caipira_inteiro_com_pele_cozido': 300,
+  'Frango_caipira_inteiro_sem_pele_cozido': 270,
+  'Frango_coração_cru': 150,
+  'Frango_coração_grelhado': 200,
+  'Frango_coxa_com_pele_assada': 220,
+  'Frango_coxa_com_pele_crua': 200,
+  'Frango_coxa_sem_pele_cozida': 200,
+  'Frango_coxa_sem_pele_crua': 180,
+  'Frango_fígado_cru': 150,
+  'Frango_filé_à_milanesa': 220,
+  'Frango_inteiro_com_pele_cru': 220,
+  'Frango_inteiro_sem_pele_assado': 250,
+  'Frango_inteiro_sem_pele_cozido': 220,
+  'Frango_inteiro_sem_pele_cru': 200,
+  'Frango_peito_com_pele_assado': 200,
+  'Frango_peito_com_pele_cru': 180,
+  'Frango_peito_sem_pele_cozido': 170,
+  'Frango_peito_sem_pele_cru': 150,
+  'Frango_peito_sem_pele_grelhado': 170,
+  'Frango_sobrecoxa_com_pele_assada': 240,
+  'Frango_sobrecoxa_com_pele_crua': 220,
+  'Frango_sobrecoxa_sem_pele_assada': 220,
+  'Frango_sobrecoxa_sem_pele_crua': 200,
+  'Hambúrguer_bovino_cru': 250,
+  'Hambúrguer_bovino_frito': 300,
+  'Hambúrguer_bovino_grelhado': 280,
+  'Linguiça_frango_crua': 200,
+  'Linguiça_frango_frita': 250,
+  'Linguiça_frango_grelhada': 220,
+  'Linguiça_porco_crua': 280,
+  'Linguiça_porco_frita': 320,
+  'Linguiça_porco_grelhada': 300,
+  'Mortadela': 300,
+  'Peru_congelado_assado': 220,
+  'Peru_congelado_cru': 180,
+  'Peru_congelado_frito': 250,
+  'Peru_congelado_grelhado': 200,
+  'Peru_congelado_sem_pele_assado': 200,
+  'Peru_congelado_sem_pele_cru': 160,
+  'Peru_congelado_sem_pele_frito': 220,
+  'Peru_congelado_sem_pele_grelhado': 180,
+  'Porco_costela_assada': 350,
+  'Porco_costela_crua': 280,
+  'Porco_lombo_assado': 320,
+  'Porco_lombo_cru': 280,
+  'Porco_orelha_salgada_cozida': 180,
+  'Porco_orelha_salgada_crua': 150,
+  'Porco_pernil_assado': 300,
+  'Porco_pernil_cru': 250,
+  'Porco_rabo_salgado_cru': 200,
+  'Presunto_com_capa_de_gordura': 180,
+  'Presunto_sem_capa_de_gordura': 140,
+  'Quibe_assado': 300,
+  'Quibe_cru': 250,
+  'Quibe_frito': 320,
+  'Salame': 400,
+  'Toucinho_cru': 300,
+};
+
+
+    const CcaloriasPorPorcao7 = {
+  'Bebida_lactea_pessego': 231,
+  'Creme_de_leite': 927,
+  'Iogurte_natural': 215,
+  'Iogurte_natural_desnatado': 174,
+  'Iogurte_sabor_abacaxi': null,
+  'Iogurte_sabor_morango': 291,
+  'Iogurte_sabor_pessego': 284,
+  'Leite_condensado': 1308,
+  'Leite_de_cabra': 278,
+  'Leite_de_vaca_achocolatado': 347,
+  'Leite_de_vaca_desnatado_po': 1513,
+  'Leite_de_vaca_desnatado_UHT': null,
+  'Leite_de_vaca_integral': null,
+  'Leite_de_vaca_integral_po': 2078,
+  'Leite_fermentado': 291,
+  'Queijo_minas_frescal': 1106,
+  'Queijo_minas_meia_cura': 1342,
+  'Queijo_mozarela': 1380,
+  'Queijo_parmesao': 1895,
+  'Queijo_pasteurizado': 1268,
+  'Queijo_petit_suisse_morango': 507,
+  'Queijo_prato': 1506,
+  'Queijo_requeijao_cremoso': 1074,
+  'Queijo_ricota': 585,
+ 
+};
+
+
+    const CcaloriasPorPorcao8 = {
+    'Bebida_isotonica_sabores_variados': 80,
+    'Cafe_infusao_10%': 2,
+    'Cana_aguardente': 220,
+    'Cana_caldo_de': 150,
+    'Cerveja_pilsen': 45,
+    'Cha_erva-doce_infusao_5%': 2,
+    'Cha_mate_infusao_5%': 2,
+    'Cha_preto_infusao_5%': 2,
+    'Coco_agua_de': 20,
+    'Refrigerante_tipo_agua_tonica': 90,
+    'Refrigerante_tipo_cola': 140,
+    'Refrigerante_tipo_guarana': 120,
+    'Refrigerante_tipo_laranja': 110,
+    'Refrigerante_tipo_limao': 120,
+    'Suco_abacaxi_natural': 50,
+    'Suco_laranja_natural': 50,
+    'Suco_maca_natural': 50,
+    'Suco_uva_natural': 60,
+    'Vinho_branco': 120,
+    'Vinho_rosa': 130,
+    'Vinho_tinto': 125,
+    'Cerveja_sem_alcool': 30,
+    'Coquetel_frutas_sem_alcool': 100,
+    'Hidromel': 220,
+    'Licor_amendoa': 110,
+    'Licor_cacau': 90,
+    'Licor_cafe': 80,
+    'Licor_laranja': 95,
+    'Licor_limao': 80,
+    'Licor_mel': 90,
+    'Licor_menta': 70,
+    'Licor_morango': 90,
+    'Licor_pessego': 95,
+    'Licor_umbu': 100,
+    'Martini': 140,
+    'Pina_colada': 250,
+    'Ponche_frutas_sem_alcool': 60,
+    'Ponche_frutas_com_alcool': 150,
+    'Quentao': 200,
+    'Sidra': 130,
+    'Tequila': 96,
+    'Vodka': 64,
+    'Whisky': 70
+};
+
+
+
+
+
+
+
+        const alimentos = document.querySelectorAll('.IMC select[id^="alimento"]');
+        const alimentos2 = document.querySelectorAll('.IMC select[id^="alimento2"]');
+        const alimentos3 = document.querySelectorAll('.IMC select[id^="alimento3"]');
+        const alimentos4 = document.querySelectorAll('.IMC select[id^="alimento4"]');
+        const alimentos5 = document.querySelectorAll('.IMC select[id^="alimento5"]');
+        const alimentos6 = document.querySelectorAll('.IMC select[id^="alimento6"]');
+        const alimentos7 = document.querySelectorAll('.IMC select[id^="alimento7"]');
+        const alimentos8 = document.querySelectorAll('.IMC select[id^="alimento8"]');
+        const calcularButton = document.getElementById('calcularButton');
+
+        function calcularCaloriasComida(alimentos1, alimentos2, alimentos3, alimentos4, alimentos5, alimentos6, alimentos7, alimentos8) {
+  let totalCalorias = 0;
+
+
+  alimentos1.forEach(function (alimento) {
+    const nomeAlimento = alimento.value;
+    const caloriasPorPorcao = CcaloriasPorPorcao[nomeAlimento] || null;
+    if (caloriasPorPorcao !== null) {
+      totalCalorias += caloriasPorPorcao;
+    }
+  });
+
+ 
+  alimentos2.forEach(function (alimento) {
+    const nomeAlimento = alimento.value;
+    const caloriasPorPorcao = CcaloriasPorPorcao2[nomeAlimento] || null;
+    if (caloriasPorPorcao !== null) {
+      totalCalorias += caloriasPorPorcao;
+    }
+  });
+
+  alimentos3.forEach(function (alimento) {
+    const nomeAlimento = alimento.value;
+    const caloriasPorPorcao = CcaloriasPorPorcao3[nomeAlimento] || null;
+    if (caloriasPorPorcao !== null) {
+      totalCalorias += caloriasPorPorcao;
+    }
+  });
+
+  alimentos4.forEach(function (alimento) {
+    const nomeAlimento = alimento.value;
+    const caloriasPorPorcao = CcaloriasPorPorcao4[nomeAlimento] || null;
+    if (caloriasPorPorcao !== null) {
+      totalCalorias += caloriasPorPorcao;
+    }
+  });
+
+  alimentos5.forEach(function (alimento) {
+    const nomeAlimento = alimento.value;
+    const caloriasPorPorcao = CcaloriasPorPorcao5[nomeAlimento] || null;
+    if (caloriasPorPorcao !== null) {
+      totalCalorias += caloriasPorPorcao;
+    }
+  });
+
+  alimentos6.forEach(function (alimento) {
+    const nomeAlimento = alimento.value;
+    const caloriasPorPorcao = CcaloriasPorPorcao6[nomeAlimento] || null;
+    if (caloriasPorPorcao !== null) {
+      totalCalorias += caloriasPorPorcao;
+    }
+  });
+
+  alimentos7.forEach(function (alimento) {
+    const nomeAlimento = alimento.value;
+    const caloriasPorPorcao = CcaloriasPorPorcao7[nomeAlimento] || null;
+    if (caloriasPorPorcao !== null) {
+      totalCalorias += caloriasPorPorcao;
+    }
+  });
+
+  alimentos8.forEach(function (alimento) {
+    const nomeAlimento = alimento.value;
+    const caloriasPorPorcao = CcaloriasPorPorcao8[nomeAlimento] || null;
+    if (caloriasPorPorcao !== null) {
+      totalCalorias += caloriasPorPorcao;
+    }
+  });
+
+  return totalCalorias || null;
+}
+
+
+
+
+        function calcularGastoCalorico() {
+            const peso = parseFloat(document.getElementById('peso').value) || 0;
+            const altura = parseFloat(document.getElementById('altura').value) || 0;
+            const idade = parseFloat(document.getElementById('idade').value) || 0;
+            const sexo = document.getElementById('sexo').value;
+            const atividade = document.getElementById('atividade').value;
+
+            let totalCalorias = calcularCaloriasComida(alimentos, alimentos2, alimentos3,alimentos4,alimentos5,alimentos6,alimentos7,alimentos8);
+
+         
+
+            let taxaMetabolicaBasal;
+
+            if (sexo === 'feminino') {
+                taxaMetabolicaBasal = 655 + (9.6 * peso) + (1.8 * altura) - (4.7 * idade);
+            } else {
+                taxaMetabolicaBasal = 66 + (13.7 * peso) + (5 * altura) - (6.8 * idade);
+            }
+
+            let fatorAtividade;
+
+            switch (atividade) {
+                case 'sedentario':
+                    fatorAtividade = 1.2;
+                    break;
+                case 'leve':
+                    fatorAtividade = 1.375;
+                    break;
+                case 'moderado':
+                    fatorAtividade = 1.55;
+                    break;
+                case 'ativo':
+                    fatorAtividade = 1.725;
+                    break;
+                case 'muitoativo':
+                    fatorAtividade = 1.9;
+                    break;
+            }
+
+            const gastoCalorico = taxaMetabolicaBasal * fatorAtividade + totalCalorias;
+            const imc = calcularIMC(peso, altura);
+
+            const relatorioElement = document.getElementById('relatorio');
+            relatorioElement.style.display = 'block';
+
+            const resultadoElement = document.getElementById('resultado');
+            resultadoElement.innerHTML = `<strong>Gasto Calórico: ${gastoCalorico.toFixed(2)} calorias</strong>.<br><strong>IMC: ${imc.toFixed(2)}</strong>`;
+
+            const dicaElement = document.getElementById('dica');
+            dicaElement.textContent = gerarDica(gastoCalorico);
+        }
+
+        function calcularIMC(peso, altura) {
+            const alturaMetros = altura / 100;
+            return peso / (alturaMetros * alturaMetros);
+        }
+
+        function gerarDica(gastoCalorico, imc) {
+            const dicasPorGastoCalorico = {
+    baixo: [
+        'Certifique-se de obter calorias suficientes para suportar suas atividades diárias.',
+        'Inclua uma variedade de alimentos nutritivos em suas refeições.',
+        'Experimente consumir mais proteínas magras, como peito de frango ou tofu.',
+        'Adicione frutas ricas em antioxidantes à sua dieta para fortalecer seu sistema imunológico.',
+        'Considere o consumo de alimentos ricos em ferro, como espinafre, para evitar a fadiga.',
+        'Diversifique suas fontes de proteínas para garantir uma ampla gama de aminoácidos essenciais.',
+        'Inclua alimentos ricos em ácidos graxos ômega-3, como salmão, para promover a saúde cardiovascular.',
+        'Adote uma abordagem equilibrada ao escolher carboidratos, optando por opções integrais.',
+        'Consuma alimentos ricos em cálcio, como laticínios, para fortalecer ossos e dentes.',
+        'Incorpore alimentos ricos em vitamina C, como frutas cítricas, para fortalecer o sistema imunológico.',
+        'Evite alimentos processados e ricos em açúcares adicionados para manter a saúde metabólica.',
+        'Experimente diferentes tipos de chás, como chá verde, para aproveitar os benefícios antioxidantes.',
+        'Incorpore legumes crucíferos, como brócolis, couve-flor e repolho, para obter nutrientes essenciais.',
+        'Mantenha uma rotina regular de sono para apoiar o processo de recuperação do corpo.',
+        'Adicione alimentos ricos em zinco, como carne magra e legumes, para fortalecer o sistema imunológico.',
+        'Evite pular refeições e mantenha um cronograma de alimentação consistente.',
+        'Utilize ervas e especiarias para adicionar sabor às refeições sem calorias extras.',
+        'Inclua fontes de fibras solúveis, como aveia, para manter a saúde digestiva.',
+        'Consuma alimentos ricos em antioxidantes, como bagas, para combater o estresse oxidativo.',
+        'Experimente diferentes tipos de nozes e sementes para obter uma variedade de nutrientes.',
+        'Opte por fontes magras de proteína, como peito de frango e peixe, para apoiar a construção muscular.',
+        'Mantenha-se hidratado, optando por água como a principal fonte de hidratação.',
+        'Inclua alimentos ricos em vitamina D, como salmão e cogumelos, para a saúde dos ossos.',
+        'Faça refeições em porções menores ao longo do dia para manter níveis de energia estáveis.',
+        'Evite alimentos ricos em gorduras saturadas e opte por gorduras saudáveis, como abacate e azeite de oliva.',
+        'Pratique técnicas de relaxamento, como a meditação, para gerenciar o estresse.',
+        'Mantenha um diário alimentar para monitorar padrões alimentares e identificar áreas de melhoria.',
+        'Experimente diferentes tipos de legumes e verduras para garantir uma variedade de nutrientes.',
+    ],
+
+    moderado: [
+        'Seu gasto calórico parece equilibrado. Continue assim!',
+        'Mantenha uma hidratação adequada ao longo do dia.',
+        'Varie suas fontes de proteínas, incluindo carne magra, ovos e leguminosas.',
+        'Inclua alimentos ricos em fibras para promover a saúde digestiva.',
+        'Pratique atividades físicas regularmente para manter um estilo de vida saudável.',
+        'Consuma uma combinação de proteínas de origem animal e vegetal para garantir aminoácidos essenciais.',
+        'Adote uma abordagem equilibrada ao escolher carboidratos, optando por opções integrais.',
+        'Inclua alimentos ricos em ômega-3, como chia e linhaça, para apoiar a saúde cardiovascular.',
+        'Consuma alimentos ricos em antioxidantes, como frutas e vegetais coloridos, para combater os radicais livres.',
+        'Mantenha uma programação consistente de exercícios, incluindo treinamento de força e aeróbico.',
+        'Opte por lanches saudáveis, como frutas, nozes e iogurte grego, entre as refeições principais.',
+        'Incorpore alimentos fermentados, como iogurte e kimchi, para promover a saúde intestinal.',
+        'Evite o excesso de alimentos processados e opte por opções caseiras sempre que possível.',
+        'Ajuste suas porções com base em suas necessidades individuais e níveis de atividade.',
+        'Mantenha um equilíbrio entre os macronutrientes, incluindo carboidratos, proteínas e gorduras saudáveis.',
+        'Experimente diferentes tipos de chás, como camomila, para apoiar a saúde digestiva e reduzir o estresse.',
+        'Priorize alimentos de origem vegetal, como legumes, frutas e grãos integrais.',
+        'Evite consumir alimentos ricos em aditivos e conservantes.',
+        'Participe de atividades ao ar livre para combinar exercício físico com exposição à natureza.',
+        'Mantenha uma rotina consistente de sono para otimizar a recuperação e o desempenho.',
+        'Inclua alimentos ricos em ferro, como carne magra e folhas verde-escuras, para apoiar a saúde sanguínea.',
+        'Opte por métodos de preparo de alimentos saudáveis, como grelhar, assar ou cozinhar no vapor.',
+        'Experimente diferentes tipos de grãos integrais, como quinoa e bulgur, para variar sua dieta.',
+        'Faça refeições equilibradas com uma variedade de cores, indicando uma ampla gama de nutrientes.',
+        'Adicione ervas e temperos frescos às suas refeições para adicionar sabor sem calorias extras.',
+        'Mantenha-se ativo durante todo o dia, procurando oportunidades para movimentar-se.',
+        'Estabeleça metas realistas de saúde e bem-estar e comemore os progressos alcançados.',
+        'Participe de atividades sociais que promovam a saúde mental e o bem-estar emocional.',
+    ],
+
+    alto: [
+        'Você está se exercitando muito! Lembre-se de descansar e se hidratar.',
+        'Considere ajustar sua dieta para atender às necessidades do seu treino.',
+        'Inclua carboidratos complexos em suas refeições para fornecer energia sustentada.',
+        'Consuma alimentos ricos em antioxidantes para apoiar a recuperação muscular.',
+        'Mantenha uma proporção equilibrada de macronutrientes para otimizar o desempenho.',
+        'Aumente a ingestão de proteínas para apoiar a reparação muscular e o crescimento.',
+        'Incorpore lanches ricos em proteínas, como barras de proteína e shakes, após o treino.',
+        'Consuma uma variedade de alimentos coloridos para obter uma ampla gama de nutrientes.',
+        'Adote estratégias de recuperação, como banhos de gelo e massagem, para otimizar a regeneração muscular.',
+        'Mantenha-se bem hidratado, aumentando a ingestão de água durante atividades físicas intensas.',
+        'Ajuste suas porções de acordo com as necessidades específicas do treinamento e metas de condicionamento físico.',
+        'Inclua alimentos ricos em magnésio, como sementes de abóbora e espinafre, para apoiar a saúde muscular.',
+        'Experimente suplementos nutricionais, como proteína em pó e BCAAs, para melhorar a recuperação.',
+        'Evite alimentos ricos em gorduras saturadas antes do treino para evitar desconforto estomacal.',
+        'Priorize carboidratos de absorção lenta, como batata-doce e aveia, para manter os níveis de energia.',
+        'Mantenha um diário de treino para rastrear o progresso e identificar áreas de melhoria.',
+        'Experimente diferentes métodos de treinamento, como HIIT e treino de resistência, para desafiar o corpo.',
+        'Incorpore alimentos ricos em potássio, como bananas, para prevenir cãibras musculares.',
+        'Consulte um nutricionista esportivo para orientação personalizada em relação à sua atividade física intensa.',
+        'Evite o consumo excessivo de cafeína, especialmente antes do treino noturno, para garantir uma boa qualidade de sono.',
+        'Participe de programas de alongamento e flexibilidade para melhorar a amplitude de movimento e reduzir o risco de lesões.',
+        'Consuma alimentos ricos em água, como pepino e melancia, para manter a hidratação.',
+        'Mantenha um equilíbrio entre treino e descanso para evitar a fadiga excessiva e o risco de lesões.',
+        'Inclua alimentos ricos em vitamina E, como amêndoas e abacate, para apoiar a saúde celular.',
+        'Monitore os níveis de estresse e adote práticas de gerenciamento de estresse, como meditação e respiração profunda.',
+        'Estabeleça metas específicas para o seu treinamento e ajuste sua dieta conforme necessário para alcançar esses objetivos.',
+        'Consulte regularmente profissionais de saúde, incluindo um médico e um treinador, para avaliações e orientações.',
+        'Priorize o sono de qualidade, garantindo um ambiente propício ao descanso e à recuperação.',
+        'Desfrute de atividades recreativas fora do treino para manter um equilíbrio entre vida e fitness.',
+    ],
+};
+
+    let dicas = '';
+
+    if (gastoCalorico > 2500) {
+        dicas += getRandomDica(dicasPorGastoCalorico.alto);
+    } else if (gastoCalorico < 1500) {
+        dicas += getRandomDica(dicasPorGastoCalorico.baixo);
+    } else {
+        dicas += getRandomDica(dicasPorGastoCalorico.moderado);
+    }
+
+    return dicas;
+}
+
+
+function getRandomDica(dicasArray) {
+    const randomIndex = Math.floor(Math.random() * dicasArray.length);
+    return dicasArray[randomIndex];
+}
+
+
+        
+
+
+
+        if (calcularButton) {
+            calcularButton.addEventListener('click', calcularGastoCalorico);
+        }
+    });
+</script>
+</body>
+
+</html>

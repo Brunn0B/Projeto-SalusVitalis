@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SalusVitalis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        #menu-servicos {
+            background-color: #00242e;
+            color: #fff;
+            padding: 20px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 80%;
+
+            width: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 999;
+            border-top-right-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+
+        #menu-servicos h2 {
+            margin-bottom: 20px;
+        }
+
+        #menu-servicos .logo img {
+            max-width: 150px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        #menu-servicos a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        #menu-servicos a i {
+            margin-right: 10px;
+        }
+
+        #menu-servicos a:hover {
+            color: #16c5b1;
+        }
+
+        #conteudo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            margin-left: 250px;
+        }
+
+        #menu-servicos {
+            background-color: #00242e;
+            color: #fff;
+            padding: 20px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 999;
+            border-top-right-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+
+
+        #descricao {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            width: 80%;
+        }
+
+        .descricao-texto {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .descricao-imagem {
+            flex: 1;
+        }
+
+        .descricao-imagem img {
+            max-width: 100%;
+            border-radius: 5px;
+            transition: transform 0.3s;
+        }
+
+        .descricao-imagem:hover img {
+            transform: scale(1.1);
+        }
+
+
+        #botao-acesso {
+            background-color: #02546b;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        #botao-acesso:hover {
+            background-color: #05bef0;
+        }
+
+
+        footer {
+            background-color: #00242e;
+            padding: 20px 0;
+            text-align: center;
+            color: #fff;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+        }
+
+
+        .rodape {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .informacoes-contato {
+            text-align: right;
+        }
+
+        #botao-chat {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #02546b;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            z-index: 9999;
+        }
+
+        #popup-chat {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            z-index: 9999;
+            width: 300px;
+            color: #fff;
+        }
+
+        #popup-chat img {
+            margin-bottom: 10px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #chatbot-messages {
+            max-height: 10000px;
+
+            overflow-y: auto;
+        }
+
+        #botao-abrir-chat {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #02546b;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            z-index: 9999;
+
+        }
+
+        #botao-fechar {
+            background-color: #00233b;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #botao-fechar:hover {
+            background-color: #d32f2f;
+        }
+
+        .enviar-button {
+            background-color: #00233b;
+            color: rgb(255, 255, 255);
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>SalusVitalis</h1>
+    </header>
+
+    <div id="menu-servicos">
+        <div class="logo">
+            <img src="img/Salusvitalis-removebg-preview.png" alt="Logo da SalusVitalis">
+        </div>
+
+        <a href="Noticias.html">
+            <!--i class="fas fa-heart"--></i>Noticias</a>
+        <a href="contato.html">
+            <!--i class="fas fa-dumbbell"--></i>Contato</a>
+        <a href="Equipe.html">
+            <!--i class="fas fa-utensils"--></i>Equipe</a>
+    </div>
+
+    <div id="conteudo">
+        <section id="descricao">
+            <div class="descricao-texto">
+                <h2>SalusVitalis - Sua Jornada para a Saúde Ideal!</h2>
+                <p>O que oferecemos:</p>
+                <ul>
+                    <li>Medição de IMC Simples e Precisa: Use nossa calculadora de IMC para avaliar sua saúde.</li>
+                    <li>Orientações de Alimentação Equilibrada: Receba dicas para melhorar sua dieta com base no seu
+                        IMC.</li>
+                    <li>Suporte para uma Vida Mais Saudável: Oferecemos apoio e incentivo em sua jornada de
+                        bem-estar.</li>
+                </ul>
+                <a href="loguin.html">
+                    <button id="botao-acesso">Acessar</button>
+                </a>
+            </div>
+
+            <div class="descricao-imagem">
+                <img src="img/Cara sentado.png" alt="Imagem Grande">
+            </div>
+        </section>
+
+        <footer>
+            <div class="rodape">
+
+            </div>
+            <p class="direitos-autorais">&copy; 2023 SalusVitalis. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+
+    <button id="botao-abrir-chat" onclick="abrirChat()">Chat</button>
+
+    <div id="popup-chat" class="hidden">
+        <img src="img/Chat bot.png" alt="Imagem do Chatbot" width="150" height="150">
+        <div id="chatbot-messages">
+            <p><strong>Chatbot:</strong> Olá! Como posso ajudar você?</p>
+        </div>
+        <input type="text" id="user-input" placeholder="Digite sua mensagem..." onkeydown="handleKeyPress(event)" />
+        <div id="botoes-chat">
+            <button class="enviar-button" type="button" onclick="sendMessage()">Enviar</button>
+
+            <button id="botao-fechar" onclick="fecharChat()">Fechar</button>
+        </div>
+        <div id="resposta-chatbot">
+            <div class="chat-ai"></div>
+        </div>
+    </div>
+
+    <script>
+        class Chatbot {
+
+            constructor() {
+                this.responses = {
+                    "olá": "Olá! Como posso ajudar você?",
+                    "como você está?": "Estou apenas um programa de computador, então sempre estou bem. Como posso ajudar você?",
+                    "adeus": "Até mais! Se precisar de ajuda no futuro, é só voltar.",
+                    "oi": "Olá, em que posso ajudar?",
+                    "o que é uma dieta equilibrada?": "Inclui uma variedade de alimentos saudáveis de diferentes grupos.",
+                    "quantas calorias devo consumir por dia?": "Varia de pessoa para pessoa; consulte um nutricionista.",
+                    "como perder peso de forma saudável?": "Com dieta equilibrada, exercícios e mudanças no estilo de vida.",
+                    "o que é imc?": "O IMC é o Índice de Massa Corporal, uma medida que permite avaliar se o peso de uma pessoa está adequado para a sua altura. O cálculo do IMC é feito dividindo o peso da pessoa pela altura ao quadrado.Mede a gordura corporal com base em altura e peso.",
+                    "qual é o imc saudável?": "Geralmente entre 18,5 e 24,9.",
+                    "o que é uma dieta vegetariana?": "Exclui carne, mas pode incluir produtos de origem animal.",
+                    "o que são gorduras saturadas e insaturadas?": "Saturadas em carne e laticínios, insaturadas em óleos e abacates.",
+                    "quantos litros de água devo beber por dia?": "Cerca de 8 copos de 200 ml é um bom ponto de partida.",
+                    "quais são os benefícios do exercício regular?": "Melhora saúde cardiovascular, força muscular, humor e ajuda no peso.",
+                    "posso comer doces ocasionalmente em uma dieta saudável?": "Sim, com moderação e opções mais saudáveis.",
+                    "qual é a importância de uma dieta balanceada?": "Fornece nutrientes essenciais para a saúde.",
+                    "quais são os macronutrientes?": "Carboidratos, proteínas e gorduras são essenciais.",
+                    "como calcular a ingestão diária de calorias?": "Depende de idade, sexo, nível de atividade; consulte um nutricionista.",
+                    "o que são calorias vazias?": "Provenientes de alimentos com pouco valor nutricional, como doces.",
+                    "quais são os alimentos ricos em fibras?": "Frutas, vegetais, grãos integrais e leguminosas.",
+                    "como reduzir o consumo de açúcar?": "Evite refrigerantes, doces e alimentos processados.",
+                    "qual é a diferença entre vitaminas e minerais?": "Vitaminas são orgânicas, minerais são inorgânicos, ambos essenciais.",
+                    "como ganhar peso de forma saudável?": "Para ganhar peso de forma saudável, você pode seguir estas dicas:\n1. Aumente a ingestão calórica com alimentos nutritivos.\n2. Coma mais proteínas, como carne magra, peixe, ovos e laticínios.\n3. Inclua alimentos ricos em gorduras saudáveis, como abacates e nozes.\n4. Faça exercícios de resistência para ganhar massa muscular.\n5. Evite o consumo excessivo de alimentos não saudáveis.\nLembre-se de consultar um profissional de saúde ou nutricionista para orientações personalizadas.",
+                    "o que é uma dieta equilibrada?": "Uma dieta equilibrada inclui uma variedade de alimentos de diferentes grupos para fornecer nutrientes essenciais ao corpo. Isso significa consumir uma combinação de carboidratos, proteínas, gorduras, vitaminas e minerais. É importante incluir frutas, vegetais, grãos integrais, proteínas magras e laticínios com baixo teor de gordura em sua dieta.",
+                    "quantos litros de água devo beber por dia?": "A quantidade recomendada de água pode variar, mas um bom ponto de partida é consumir cerca de 8 copos de 200 ml de água por dia. No entanto, as necessidades individuais podem variar dependendo de fatores como clima, nível de atividade e saúde pessoal. O importante é manter-se hidratado e beber água regularmente ao longo do dia.",
+                    "quais são os benefícios do exercício regular?": "O exercício regular oferece diversos benefícios para a saúde, incluindo melhoria da saúde cardiovascular, aumento da força muscular, melhoria do humor e auxílio na manutenção de um peso saudável. Além disso, o exercício pode reduzir o risco de várias condições de saúde, como doenças cardíacas, diabetes e hipertensão.",
+                    "posso comer doces ocasionalmente em uma dieta saudável?": "Sim, você pode consumir doces ocasionalmente em uma dieta saudável, desde que seja com moderação. Opte por versões mais saudáveis de doces ou escolha opções com menos açúcar. O equilíbrio é essencial, e o foco principal deve ser uma dieta rica em alimentos nutritivos.",
+                    "o que são calorias vazias?": "Calorias vazias referem-se a calorias provenientes de alimentos que fornecem poucos ou nenhum valor nutricional. Isso inclui alimentos altamente processados, refrigerantes, doces e lanches não saudáveis. Essas calorias não fornecem os nutrientes essenciais que o corpo precisa para se manter saudável.",
+                    "quais são os alimentos ricos em fibras?": "Alimentos ricos em fibras incluem frutas, vegetais, grãos integrais (como aveia e quinua) e leguminosas (como feijões e lentilhas). As fibras são importantes para a saúde digestiva e podem ajudar a controlar os níveis de açúcar no sangue e o colesterol.",
+                    "como reduzir o consumo de açúcar?": "Para reduzir o consumo de açúcar, evite refrigerantes, doces, bolos, biscoitos e alimentos processados, que são fontes comuns de açúcar adicionado. Leia os rótulos dos alimentos para identificar o açúcar oculto. Opte por substitutos naturais, como frutas frescas, para satisfazer seu desejo por doces.",
+                    "ola": "Ola! Como posso ajudar voce?",
+                    "como voce esta?": "Estou apenas um programa de computador, entao sempre estou bem. Como posso ajudar voce?",
+                    "adeus": "Ate mais! Se precisar de ajuda no futuro, e so voltar.",
+                    "oi": "Ola, em que posso ajudar?",
+                    "o que e uma dieta equilibrada?": "Inclui uma variedade de alimentos saudaveis de diferentes grupos.",
+                    "quantas calorias devo consumir por dia?": "Varia de pessoa para pessoa; consulte um nutricionista.",
+                    "como perder peso de forma saudavel?": "Com dieta equilibrada, exercicios e mudancas no estilo de vida.",
+                    "o que e imc?": "O IMC é o Índice de Massa Corporal, uma medida que permite avaliar se o peso de uma pessoa está adequado para a sua altura. O cálculo do IMC é feito dividindo o peso da pessoa pela altura ao quadrado.",
+                    "qual e o imc saudavel?": "Geralmente entre 18,5 e 24,9.",
+                    "o que e uma dieta vegetariana?": "Exclui carne, mas pode incluir produtos de origem animal.",
+                    "o que sao gorduras saturadas e insaturadas?": "Saturadas em carne e laticinios, insaturadas em oleos e abacates.",
+                    "quantos litros de agua devo beber por dia?": "Cerca de 8 copos de 200 ml e um bom ponto de partida.",
+                    "quais sao os beneficios do exercicio regular?": "Melhora saude cardiovascular, forca muscular, humor e ajuda no peso.",
+                    "posso comer doces ocasionalmente em uma dieta saudavel?": "Sim, com moderacao e opcoes mais saudaveis.",
+                    "qual e a importancia de uma dieta balanceada?": "Fornece nutrientes essenciais para a saude.",
+                    "quais sao os macronutrientes?": "Carboidratos, proteinas e gorduras sao essenciais.",
+                    "como calcular a ingestao diaria de calorias?": "Depende de idade, sexo, nivel de atividade; consulte um nutricionista.",
+                    "o que sao calorias vazias?": "Provenientes de alimentos com pouco valor nutricional, como doces.",
+                    "quais sao os alimentos ricos em fibras?": "Frutas, vegetais, graos integrais e leguminosas.",
+                    "como reduzir o consumo de acucar?": "Evite refrigerantes, doces e alimentos processados.",
+                    "qual e a diferenca entre vitaminas e minerais?": "Vitaminas sao organicas, minerais sao inorganicos, ambos essenciais.",
+                    "como ganhar peso de forma saudavel?": "Para ganhar peso de forma saudavel, voce pode seguir estas dicas:\n1. Aumente a ingestao calorica com alimentos nutritivos.\n2. Coma mais proteinas, como carne magra, peixe, ovos e laticinios.\n3. Inclua alimentos ricos em gorduras saudaveis, como abacates e nozes.\n4. Faca exercicios de resistencia para ganhar massa muscular.\n5. Evite o consumo excessivo de alimentos nao saudaveis.\nLembre-se de consultar um profissional de saude ou nutricionista para orientacoes personalizadas.",
+                    "o que e uma dieta equilibrada?": "Uma dieta equilibrada inclui uma variedade de alimentos de diferentes grupos para fornecer nutrientes essenciais ao corpo. Isso significa consumir uma combinacao de carboidratos, proteinas, gorduras, vitaminas e minerais. E importante incluir frutas, vegetais, graos integrais, proteinas magras e laticinios com baixo teor de gordura em sua dieta.",
+                    "quantos litros de agua devo beber por dia?": "A quantidade recomendada de agua pode variar, mas um bom ponto de partida e consumir cerca de 8 copos de 200 ml de agua por dia. No entanto, as necessidades individuais podem variar dependendo de fatores como clima, nivel de atividade e saude pessoal. O importante e manter-se hidratado e beber agua regularmente ao longo do dia.",
+                    "quais sao os beneficios do exercicio regular?": "O exercicio regular oferece diversos beneficios para a saude, incluindo melhoria da saude cardiovascular, aumento da forca muscular, melhoria do humor e auxilio na manutencao de um peso saudavel. Alem disso, o exercicio pode reduzir o risco de varias condicoes de saude, como doencas cardiacas, diabetes e hipertensao.",
+                    "posso comer doces ocasionalmente em uma dieta saudavel?": "Sim, voce pode consumir doces ocasionalmente em uma dieta saudavel, desde que seja com moderacao. Opte por versoes mais saudaveis de doces ou escolha opcoes com menos acucar. O equilibrio e essencial, e o foco principal deve ser uma dieta rica em alimentos nutritivos.",
+                    "o que sao calorias vazias?": "Calorias vazias referem-se a calorias provenientes de alimentos que fornecem poucos ou nenhum valor nutricional. Isso inclui alimentos altamente processados, refrigerantes, doces e lanches nao saudaveis. Essas calorias nao fornecem os nutrientes essenciais que o corpo precisa para se manter saudavel.",
+                    "quais sao os alimentos ricos em fibras?": "Alimentos ricos em fibras incluem frutas, vegetais, graos integrais (como aveia e quinua) e leguminosas (como feijoes e lentilhas). As fibras sao importantes para a saude digestiva e podem ajudar a controlar os niveis de acucar no sangue e o colesterol.",
+                    "como reduzir o consumo de acucar?": "Para reduzir o consumo de acucar, evite refrigerantes, doces, bolos, biscoitos e alimentos processados, que sao fontes comuns de acucar adicionado. Leia os rotulos dos alimentos para identificar o acucar oculto. Opte por substitutos naturais, como frutas frescas, para satisfazer seu desejo por doces.",
+                    "o que é o imc?": "o imc (índice de massa corporal) é uma medida que relaciona seu peso com sua altura.",
+                    "como o imc é calculado?": "o imc é calculado dividindo o peso da pessoa (em quilogramas) pela altura ao quadrado (em metros).",
+                    "qual é a faixa de peso saudável de acordo com o imc?": "o imc ideal para adultos geralmente está entre 18,5 e 24,9.",
+                    "o imc é o mesmo para todas as idades?": "não, o imc é calculado de maneira diferente para crianças e adolescentes.",
+                    "o que significa ter um imc abaixo do peso?": "um imc abaixo do peso indica que a pessoa pode estar com peso insuficiente para sua altura.",
+                    "qual é o imc saudável para crianças?": "o imc infantil é avaliado em percentis, com um imc entre o 5º e 85º percentil considerado saudável.",
+                    "o imc é um indicador definitivo de saúde?": "o imc é uma ferramenta de triagem, mas não considera outros fatores de saúde importantes.",
+                    "quais são os riscos de ter um imc alto?": "ter um imc elevado pode aumentar o risco de doenças como diabetes, doenças cardíacas e hipertensão.",
+                    "o imc é usado internacionalmente?": "sim, o imc é amplamente utilizado em todo o mundo para avaliar o peso e a saúde.",
+                    "como posso melhorar meu imc?": "para melhorar o imc, é recomendável adotar uma dieta saudável e praticar exercícios regularmente.",
+                    "o imc considera diferenças de gênero?": "não, o imc é a mesma medida para homens e mulheres.",
+                    "existe um imc específico para idosos?": "não, o imc não muda com a idade; os mesmos valores se aplicam a adultos mais velhos.",
+                    "qual é o imc normal para adolescentes?": "para adolescentes, um imc entre 5º e 85º percentil é considerado saudável.",
+                    "como o imc se aplica a atletas?": "o imc pode não ser uma medida precisa para atletas, pois não leva em consideração a composição corporal.",
+                    "o imc é o único indicador de saúde?": "não, outros fatores, como a composição corporal e os níveis de atividade, também são importantes.",
+                    "como o imc é calculado para crianças?": "o imc infantil é calculado da mesma forma que o dos adultos, mas os valores de referência são diferentes.",
+                    "qual é a interpretação do imc infantil?": "a interpretação do imc em crianças é feita com base em percentis e varia com a idade e o sexo da criança.",
+                    "o imc é usado para diagnóstico médico?": "o imc é mais comumente usado como uma ferramenta de triagem, não como diagnóstico definitivo.",
+                    "quais são as limitações do imc?": "o imc não leva em consideração a distribuição de gordura no corpo ou a composição corporal.",
+                    "o imc pode ser enganoso para atletas?": "sim, atletas com alta massa muscular podem ter um imc alto, mas não necessariamente excesso de gordura corporal.",
+                    "o imc é a única medida de saúde?": "não, outros fatores, como a alimentação saudável e o condicionamento físico, são igualmente importantes para a saúde.",
+                    "o imc é amplamente utilizado em pesquisas médicas?": "sim, o imc é uma medida comum usada em pesquisas e estudos relacionados à saúde.",
+                    "como o imc se aplica a diferentes grupos étnicos?": "os mesmos valores de referência se aplicam a diferentes grupos étnicos, mas podem haver variações na distribuição de gordura.",
+                    "existe uma relação entre o imc e a saúde do coração?": "sim, um imc elevado pode aumentar o risco de doenças cardíacas e hipertensão.",
+                    "o imc é afetado pela genética?": "a genética desempenha um papel no peso e no imc, mas os hábitos de vida também são fundamentais.",
+                    "qual é o imc saudável para idosos?": "para adultos mais velhos, um imc entre 24 e 29 pode ser considerado saudável.",
+                    "como o imc se aplica a crianças com crescimento lento?": "o imc em crianças é interpretado considerando o histórico de crescimento e percentis.",
+                    "existe um imc específico para grávidas?": "não, o imc não muda durante a gravidez, mas o ganho de peso é importante para a saúde da mãe e do bebê.",
+                    "o imc é uma medida precisa de saúde?": "o imc é uma medida útil, mas não definitiva da saúde; outros fatores também são importantes.",
+                    "qual é o imc desejado para atletas?": "atletas podem ter diferentes faixas de imc devido à sua composição corporal e níveis de atividade.",
+                    "o imc é usado para avaliar crianças em idade pré-escolar?": "o imc é usado principalmente para crianças em idade escolar e mais velhas; outras medidas são usadas para crianças mais jovens.",
+                    "o imc muda com a gravidez?": "o imc da mãe não muda durante a gravidez, mas o ganho de peso é monitorado durante a gestação.",
+                    "o imc é o mesmo para homens e mulheres?": "sim, os valores de referência do imc são os mesmos para homens e mulheres.",
+                    "o imc considera a distribuição de gordura?": "o imc não considera a distribuição de gordura no corpo, o que é importante para a saúde.",
+                    "qual é o imc saudável para adolescentes?": "para adolescentes, um imc entre o 5º e 85º percentil é considerado saudável.",
+                    "como o imc é interpretado em crianças?": "o imc em crianças é interpretado com base em percentis e leva em consideração idade e sexo.",
+                    "o imc é uma medida usada para tratamento de obesidade?": "o imc pode ser usado como parte do tratamento da obesidade, mas não é o único fator considerado.",
+                    "o imc é usado em programas de perda de peso?": "sim, o imc pode ser usado em programas de perda de peso para estabelecer metas realistas.",
+                    "o imc é usado para determinar a necessidade de cirurgia bariátrica?": "o imc pode ser usado como parte da avaliação, mas outras considerações também são importantes.",
+                    "o imc muda com a idade?": "o imc não muda com a idade; os mesmos valores se aplicam a adultos de todas as idades.",
+                    "o imc é uma medida usada na avaliação nutricional?": "sim, o imc é uma medida importante na avaliação nutricional e na saúde em geral.",
+                    "como o imc é usado na pesquisa médica?": "o imc é frequentemente usado em estudos de saúde e pesquisa epidemiológica.",
+                    "o imc é afetado pelo metabolismo?": "o metabolismo pode afetar o peso, mas o imc é baseado na relação peso/altura.",
+                    "qual é a interpretação do imc na infância?": "a interpretação do imc em crianças leva em consideração percentis, idade e sexo.",
+                    "o imc é usado em programas de prevenção de doenças?": "sim, o imc pode ser usado em programas de prevenção de doenças relacionadas ao peso.",
+                    "o imc é um indicador de saúde confiável?": "o imc é uma ferramenta útil, mas outros fatores também são importantes para a saúde.",
+                    "o imc é uma medida usada em programas de saúde escolar?": "sim, o imc é usado em avaliações de saúde em escolas para crianças.",
+                    "qual é o imc normal para adultos?": "para adultos, um imc entre 18,5 e 24,9 é geralmente considerado saudável.",
+                    "o imc é usado na avaliação de atletas olímpicos?": "atletas olímpicos podem ter valores de imc variados devido às suas necessidades esportivas.",
+                    "o imc é afetado pela altura?": "sim, a altura é um componente importante do cálculo do imc.",
+                    "o imc é usado para rastrear o crescimento de crianças?": "o imc é uma medida usada para rastrear o crescimento de crianças em idade escolar.",
+                    "o imc é um indicador de qualidade de vida?": "o imc é uma medida relacionada à saúde, mas não é o único indicador de qualidade de vida.",
+                    "o imc pode ser usado para avaliar a saúde mental?": "o imc não é usado para avaliar a saúde mental, mas pode estar relacionado ao bem-estar físico.",
+                    "o imc é uma medida usada em programas de bem-estar corporativo?": "sim, o imc pode ser usado em programas de bem-estar para funcionários.",
+                    "qual é o imc recomendado para atletas de resistência?": "atletas de resistência podem ter diferentes faixas de imc, dependendo de suas necessidades esportivas.",
+                    "o imc é usado na determinação de taxas de seguro de saúde?": "o imc não é usado diretamente, mas o peso e a saúde podem afetar as taxas de seguro de saúde.",
+                    "o imc é uma medida usada em programas de controle de peso?": "sim, o imc é comumente usado em programas de controle de peso para definir metas realistas.",
+                    "o imc é afetado pela etnia?": "os valores de referência do imc são os mesmos para diferentes grupos étnicos, mas a distribuição de gordura pode variar.",
+                    "qual é o imc normal para adultos mais jovens?": "para adultos mais jovens, um imc entre 18,5 e 24,9 é geralmente considerado saudável.",
+                    "o imc é usado na determinação da aptidão militar?": "o imc pode ser parte da avaliação de aptidão militar, mas outros fatores também são considerados.",
+                    "o imc é usado em programas de reabilitação física?": "o imc pode ser usado em programas de reabilitação, mas não é o único indicador.",
+                    "o imc é afetado pela alimentação?": "a alimentação pode afetar o imc, mas ele é baseado na relação peso/altura.",
+                    "qual é o imc normal para adultos mais velhos?": "para adultos mais velhos, um imc entre 24 e 29 pode ser considerado saudável.",
+                    "o imc é usado na avaliação da aptidão para o trabalho?": "o imc pode ser usado na avaliação da aptidão para algumas profissões, mas não em todas.",
+                    "o imc é uma medida usada em programas de bem-estar comunitário?": "sim, o imc pode ser usado em programas de bem-estar comunitário para promover a saúde.",
+                    "o imc é usado para avaliar a saúde infantil?": "o imc é uma medida importante na avaliação da saúde infantil e do crescimento.",
+                    "qual é o imc normal para adultos de meia-idade?": "para adultos de meia-idade, um imc entre 18,5 e 24,9 é geralmente considerado saudável.",
+                    "o imc é usado na determinação de diretrizes de alimentação escolar?": "o imc pode ser usado para orientar diretrizes de alimentação escolar, mas não é o único fator considerado.",
+                    "o imc é uma medida usada em programas de prevenção de obesidade?": "sim, o imc é usado em programas de prevenção de obesidade para identificar riscos e intervenções.",
+                    "o imc é usado na avaliação de saúde pública?": "o imc é usado na avaliação de saúde pública para monitorar tendências de peso e saúde.",
+                    "o imc é usado na determinação de recomendações de dieta?": "o imc pode ser usado na determinação de recomendações dietéticas, mas outros fatores também são importantes.",
+                    "qual é o imc normal para adultos de idade avançada?": "para adultos de idade avançada, um imc entre 24 e 29 pode ser considerado saudável.",
+                    "o imc é usado na determinação de políticas de saúde?": "o imc pode influenciar políticas de saúde pública, mas não é o único fator considerado.",
+                    "o imc é uma medida usada em programas de controle de doenças?": "sim, o imc é usado em programas de controle de doenças relacionadas ao peso.",
+                    "o imc é usado na avaliação do risco de câncer?": "o imc elevado está associado a um maior risco de certos tipos de câncer.",
+                    "o imc é usado na determinação de diretrizes de atividade física?": "o imc pode ser considerado ao estabelecer diretrizes de atividade física, mas outros fatores são importantes.",
+                    "qual é o imc normal para adultos idosos?": "para adultos idosos, um imc entre 24 e 29 pode ser considerado saudável.",
+                    "o imc é usado na avaliação de riscos cardiovasculares?": "sim, o imc pode ser usado na avaliação de riscos cardiovasculares, como doenças cardíacas.",
+                    "o imc é usado na determinação de políticas de saúde escolar?": "o imc pode influenciar políticas de saúde escolar, mas não é o único fator considerado.",
+                    "o imc é uma medida usada em programas de promoção de saúde?": "sim, o imc é usado em programas de promoção de saúde para identificar riscos e metas de saúde.",
+                    "o imc é usado na avaliação de riscos de diabetes?": "sim, o imc elevado está associado a um maior risco de diabetes tipo 2.",
+                    "o imc é usado na determinação de diretrizes de condicionamento físico?": "o imc pode ser levado em consideração nas diretrizes de condicionamento físico, mas outros fatores são importantes.",
+                    "qual é o imc normal para adultos jovens?": "para adultos jovens, um imc entre 18,5 e 24,9 é geralmente considerado saudável.",
+                    "o imc é usado na avaliação de riscos de doenças respiratórias?": "sim, o imc pode ser usado na avaliação de riscos de doenças respiratórias, como apneia do sono.",
+                    "o imc é usado na determinação de diretrizes de alimentação infantil?": "o imc pode influenciar diretrizes de alimentação infantil, mas outros fatores também são considerados.",
+                    "o imc é uma medida usada em programas de saúde materna?": "sim, o imc é usado em programas de saúde materna para avaliar a saúde da mãe e do bebê.",
+                    "o imc é usado na avaliação de riscos de osteoartrite?": "sim, o imc elevado está associado a um maior risco de osteoartrite.",
+                    "o imc é usado na determinação de diretrizes de atividade física infantil?": "o imc pode influenciar diretrizes de atividade física infantil, mas outros fatores também são considerados.",
+                    "qual é o imc normal para adultos de meia-idade?": "para adultos de meia-idade, um imc entre 18,5 e 24,9 é geralmente considerado saudável.",
+                    "o imc é usado na avaliação de riscos de doença hepática?": "sim, o imc elevado está associado a um maior risco de doença hepática não alcoólica.",
+                    "o imc é usado na determinação de diretrizes de alimentação materna?": "o imc pode influenciar diretrizes de alimentação materna, mas outros fatores também são considerados.",
+                    "o imc é uma medida usada em programas de saúde infantil?": "sim, o imc é usado em programas de saúde infantil para avaliar o crescimento e a saúde da criança.",
+                    "qual é o imc normal para adultos idosos?": "para adultos idosos, um imc entre 24 e 29 pode ser considerado saudável.",
+                    "o imc é usado na avaliação de riscos de doença renal?": "sim, o imc elevado está associado a um maior risco de doença renal.",
+                    "o imc é usado na determinação de diretrizes de atividade física materna?": "o imc pode influenciar diretrizes de atividade física materna, mas outros fatores também são considerados.",
+                    "o imc é uma medida usada em programas de promoção de saúde materna?": "sim, o imc é usado em programas de promoção de saúde materna para avaliar a saúde da mãe e do bebê.",
+                    "qual é o imc normal para adultos jovens?": "para adultos jovens, um imc entre 18,5 e 24,9 é geralmente considerado saudável.",
+                    "o imc é usado na avaliação de riscos de doença cardiovascular?": "sim, o imc pode ser usado na avaliação de riscos de doenças cardiovasculares, como hipertensão e doenças cardíacas.",
+                    "o imc é usado na determinação de diretrizes de condicionamento físico infantil?": "o imc pode influenciar diretrizes de condicionamento físico infantil, mas outros fatores também são considerados.",
+                    "o imc é uma medida usada em programas de saúde pública infantil?": "sim, o imc é usado em programas de saúde pública infantil para avaliar o crescimento e a saúde das crianças.",
+                    "qual é o imc normal para adultos de meia-idade?": "para adultos de meia-idade, um imc entre 18,5 e 24,9 é geralmente considerado saudável.",
+                    "o imc é usado na avaliação de riscos de doença pulmonar?": "sim, o imc pode ser usado na avaliação de riscos de doenças pulmonares, como apneia do sono e dificuldades respiratórias.",
+                    "o imc é usado na determinação de diretrizes de alimentação materna?": "o imc pode influenciar diretrizes de alimentação materna, mas outros fatores também são considerados.",
+                    "o imc é uma medida usada em programas de promoção de saúde infantil?": "sim, o imc é usado em programas de promoção de saúde infantil para avaliar o crescimento e a saúde das crianças.",
+                    "qual é o imc normal para adultos idosos?": "para adultos idosos, um imc entre 24 e 29 pode ser considerado saudável.",
+                    "o imc é usado na avaliação de riscos de distúrbios metabólicos?": "sim, o imc pode ser usado na avaliação de riscos de distúrbios metabólicos, como resistência à insulina e síndrome metabólica.",
+                    "o imc é usado na determinação de diretrizes de atividade física materna?": "o imc pode influenciar diretrizes de atividade física materna, mas outros fatores também são considerados.",
+                    "o imc é uma medida usada em programas de promoção de saúde materna?": "sim, o imc é usado em programas de promoção de saúde materna para avaliar a saúde da mãe e do bebê.",
+                    "qual é o imc normal para adultos jovens?": "para adultos jovens, um imc entre 18,5 e 24,9 é geralmente considerado saudável.",
+                    "o imc é usado na avaliação de riscos de transtornos alimentares?": "o imc elevado está associado a um maior risco de transtornos alimentares, como compulsão alimentar e bulimia.",
+                    "o imc é usado na determinação de diretrizes de condicionamento físico materno?": "o imc pode influenciar diretrizes de condicionamento físico materno, mas outros fatores também são considerados.",
+                    "o imc é uma medida usada em programas de promoção de saúde infantil?": "sim, o imc é usado em programas de promoção de saúde infantil para avaliar o crescimento e a saúde das crianças.",
+                    "qual é o imc normal para adultos de meia-idade?": "para adultos de meia-idade, um imc entre 18,5 e 24,9 é geralmente considerado saudável.",
+                    "o imc é usado na avaliação de riscos de problemas psicológicos?": "o imc elevado está associado a um maior risco de problemas psicológicos, como depressão e ansiedade.",
+                    "o imc é usado na determinação de diretrizes de alimentação materna?": "o imc pode influenciar diretrizes de alimentação materna, mas outros fatores também são considerados.",
+                    "o imc é uma medida usada em programas de promoção de saúde materna?": "sim, o imc é usado em programas de promoção de saúde materna para avaliar a saúde da mãe e do bebê.",
+                    "qual é o imc normal para adultos idosos?": "para adultos idosos, um imc entre 24 e 29 pode ser considerado saudável.",
+                    "o imc é usado na avaliação de riscos de problemas emocionais?": "o imc elevado está associado a um maior risco de problemas emocionais, como estresse e irritabilidade.",
+                    "o imc é usado na determinação de diretrizes de atividade física materna?": "o imc pode influenciar diretrizes de atividade física materna, mas outros fatores também são considerados.",
+                    "o imc é uma medida usada em programas de promoção de saúde materna?": "sim, o imc é usado em programas de promoção de saúde materna para avaliar a saúde da mãe e do bebê.",
+                    "qual é o imc normal para adultos jovens?": "para adultos jovens, um imc entre 18,5 e 24,9 é geralmente considerado saudável.",
+                    "o imc é usado na avaliação de riscos de problemas comportamentais?": "o imc elevado está associado a um maior risco de problemas comportamentais, como agressão e impulsividade.",
+                    "o imc é usado na determinação de diretrizes de condicionamento físico materno?": "o imc pode influenciar diretrizes de condicionamento físico materno, mas outros fatores também são considerados.",
+                    "o imc é uma medida usada em programas de promoção de saúde materna?": "sim, o imc é usado em programas de promoção de saúde materna para avaliar a saúde da mãe e do bebê.",
+                    "qual é o imc normal para adultos de meia-idade?": "para adultos de meia-idade, um imc entre 18,5 e 24,9 é geralmente considerado saudável.",
+                    "o imc é usado na avaliação de riscos de problemas sociais?": "o imc elevado está associado a um maior risco de problemas sociais, como isolamento e problemas de relacionamento.",
+                    "o imc é usado na determinação de diretrizes de alimentação materna?": "o imc pode influenciar diretrizes de alimentação materna, mas outros fatores também são considerados.",
+                    "o imc é uma medida usada em programas de promoção de saúde materna?": "sim, o imc é usado em programas de promoção de saúde materna para avaliar a saúde da mãe e do bebê.",
+                    "qual é o imc normal para adultos idosos?": "para adultos idosos, um imc entre 24 e 29 pode ser considerado saudável."
+                };
+            }
+
+            reply(userMessage) {
+                console.log("Mensagem recebida: " + userMessage);
+                const response = this.responses[userMessage.toLowerCase()];
+                if (response) {
+                    return response;
+                } else {
+                    return "Desculpe, não entendi sua pergunta.";
+                }
+            }
+        }
+
+
+        function abrirChat() {
+            document.getElementById('popup-chat').style.display = 'block';
+        }
+
+        function fecharChat() {
+            document.getElementById('popup-chat').style.display = 'none';
+        }
+
+        const chatbot = new Chatbot();
+
+        function sendMessage() {
+            const userInput = document.getElementById("user-input");
+            const chatbotMessages = document.getElementById("chatbot-messages");
+            const userMessage = userInput.value;
+
+            chatbotMessages.innerHTML += '<p><strong>Você:</strong> ' + userMessage + '</p>';
+            userInput.value = '';
+
+            const chatbotResponse = chatbot.reply(userMessage);
+            chatbotMessages.innerHTML += '<p><strong>Chatbot:</strong> ' + chatbotResponse + '</p>';
+        }
+
+        function toggleChat() {
+            var popupChat = document.getElementById("popup-chat");
+            if (popupChat.style.display === "block") {
+                popupChat.style.display = "none";
+            } else {
+                popupChat.style.display = "block";
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (event.keyCode === 13) {
+                sendMessage();
+            }
+        }
+
+        function fecharChat() {
+            var popupChat = document.getElementById("popup-chat");
+            popupChat.style.display = "none";
+        }
+    </script>
+
+
+
+</body>
+
+</html>

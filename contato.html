@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipe</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        header {
+            background-color: #00242e;
+            padding: 20px;
+            text-align: left;
+            color: #fff;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            max-width: 150px;
+            height: auto;
+            margin-right: 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #16c5b1;
+        }
+
+        section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 80px;
+            margin-left: 2%;
+            margin-right: 2%;
+            padding: 5%;
+            text-align: center;
+            width: 87%;
+
+        }
+
+
+        section h2 {
+            width: 100%;
+            font-size: 50px;
+            margin: 0;
+            font-family: 'Russo One', sans-serif;
+            font-weight: bold;
+            color: rgba(44, 68, 78, 255);
+        }
+
+        .card {
+            flex: 0 0 calc(50% - 20px);
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid rgba(44, 68, 78, 255);
+            border-radius: 15px;
+            cursor: pointer;
+        }
+
+        .Texto-oculto {
+            display: none;
+        }
+
+        .card:hover {
+            background: rgba(44, 68, 78, 255);
+            color: white;
+            padding: 40px;
+        }
+
+        .card:hover img {
+            display: none;
+        }
+
+        .card:hover .Card-text {
+            display: none;
+        }
+
+        .card:hover .Texto-oculto {
+            display: block;
+        }
+
+        footer {
+            background-color: #00242e;
+            padding: 20px 0;
+            text-align: center;
+            color: #fff;
+        }
+
+        .rodape {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="/img/Salusvitalis-removebg-preview.png" alt="Logo da Clínica de Emagrecimento">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/index.html">Início</a></li>
+
+                <li><a href="/Equipe.html">Equipe</a></li>
+                <li><a href="/Noticias.html">Notícias</a></li>
+                <!--li><a href="contato.html">Contato</a></li-->
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <h2 style="color: black;">Contato</h2>
+        <div class="card">
+            
+            <div class="Card-text">
+                <h3>Email:</h3>
+                <p>OppenHackers@gmail.com<</p>
+            </div>
+            <div class="Texto-oculto">
+                <h3>Telefone</h3>
+                <p>+55 (15) 99108-0131</p>
+            </div>
+        </div>
+
+    </section>
+
+    <footer>
+        <div class="rodape">
+            <div class="logo">
+                <img src="/img/Salusvitalis-removebg-preview.png" alt="Logo da Clínica de Emagrecimento">
+            </div>
+
+            <div class="informacoes-contato">
+
+            </div>
+        </div>
+        <p class="direitos-autorais">&copy; 2023 SalusVitalis. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+
+</html>
